@@ -1,3 +1,0 @@
-Validating "C:\Users\workshop\Documents\hakki\SPRING16\Research\dngSdkMaxTile\IMAG0256.dng"...
-Validation complete
-Please enter an integer value: 
