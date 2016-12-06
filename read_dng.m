@@ -8,3 +8,4 @@ offsets = getTag(t,'SubIFD');
 setSubDirectory(t,offsets(1));
 cfa = read(t);
 close(t);
+imtool(cfa);
