@@ -1,5 +1,5 @@
 %% 0 read the tiff image
-raw = double(imread('20161214/DSC01381.tiff'));
+raw = double(imread('ClipPoisGaus_Denoising_v211b/image_fuji_bottle1224x922.tiff'));
 
 %% 1 Linearization
 black = 0;
