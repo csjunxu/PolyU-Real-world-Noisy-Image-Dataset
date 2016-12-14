@@ -6,7 +6,7 @@ im_num = length(im_dir);
 for i = 1:im_num
     %% 0 read the tiff image
     raw = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
-    S = regexp(TT_im_dir(i).name, '\.', 'split');
+    S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
     fprintf('%s : \n',rawname);
     
