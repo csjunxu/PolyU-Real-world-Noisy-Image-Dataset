@@ -37,4 +37,5 @@ grayscale = 0.25/mean(grayim(:));
 bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
 nl_srgb = bright_srgb.^(1/2.2);
 imshow(nl_srgb);
+imwrite(nl_srgb,'DSC01381_ARW_DNG_TIF.png');
 
