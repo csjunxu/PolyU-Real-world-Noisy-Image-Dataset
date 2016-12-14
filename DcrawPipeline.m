@@ -1,9 +1,9 @@
 %% 0 read the tiff image
-raw = double(imread('ClipPoisGaus_Denoising_v211b/image_fuji_bottle1224x922.tiff'));
+raw = double(imread('20161214/DSC01381.tiff'));
 
 %% 1 Linearization
 black = 0;
-saturation = 4092 ;
+saturation = 4095;
 lin_bayer = (raw-black)/(saturation-black); % 归一化至[0,1];
 lin_bayer = max(0,min(lin_bayer,1)); % 确保没有大于1或小于0的数据;
 imshow(lin_bayer);
