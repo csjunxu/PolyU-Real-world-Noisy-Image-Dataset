@@ -14,7 +14,7 @@
 
 clear all
 close all
-
+addpath('BM3D');
 disp(' ')
 if 0   %% RAW DATA
     ztilde=double(imread('image_fuji_staircase1224x922.tiff'));   % this is a subsampled green channel raw-data from a Fujifilm FinePix S9600 camera
