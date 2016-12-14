@@ -29,4 +29,12 @@ sRGB2Cam = sRGB2Cam./ repmat(sum(sRGB2Cam,2),1,3); % normalize each rows of sRGB
 Cam2sRGB = (sRGB2Cam)^-1;
 lin_srgb = apply_cmatrix(lin_rgb, Cam2sRGB);
 lin_srgb = max(0,min(lin_srgb,1)); % Always keep image clipped b/w 0-1
+imshow(lin_srgb);
+
+%% 5 Brightness and Gamma Correction
+grayim = rgb2gray(lin_srgb); % Consider only gray channel
+grayscale = 0.25/mean(grayim(:));
+bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
+nl_srgb = bright_srgb.^(1/2.2);
+imshow(nl_srgb);
 
