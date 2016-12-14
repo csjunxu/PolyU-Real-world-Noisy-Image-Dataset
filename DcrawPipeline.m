@@ -12,3 +12,4 @@ imshow(lin_bayer);
 wb_multipliers = [1.902344, 1, 1.808594]; % for particular condition, from dcraw;
 mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
 balanced_bayer = lin_bayer .* mask;
+imshow(balanced_bayer);
