@@ -46,7 +46,6 @@ for i = 1:im_num
     bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
     nl_srgb = bright_srgb.^(1/2.2);
     imshow(nl_srgb);
-    sRGBname = fprintf('%s_ARW_DNG_TIF.png',rawname);
-    imwrite(nl_srgb,sRGBname);
+    imwrite(nl_srgb,[rawname '_ARW_DNG_TIF.png']);
 end
 
