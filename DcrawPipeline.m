@@ -11,8 +11,8 @@ for i = 1:im_num
     fprintf('%s : \n',rawname);
     
     %% 1 Linearization
-    black = 128;
-    saturation = 4095;
+    black = 0;
+    saturation = 16383;
     lin_bayer = (raw-black)/(saturation-black); % 归一化至[0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % 确保没有大于1或小于0的数据;
     imshow(lin_bayer);
@@ -35,7 +35,7 @@ for i = 1:im_num
     % Here XYZ2Cam is only for Nikon D3X, can be found in adobe_coeff in dcraw.c
     sRGB2Cam = XYZ2Cam * sRGB2XYZ;
     sRGB2Cam = sRGB2Cam./ repmat(sum(sRGB2Cam,2),1,3); % normalize each rows of sRGB2Cam to 1
-    Cam2sRGB = (sRGB2Cam)^-1;
+    Cam2sRGB = (sRGB2Cam)^-1; 
     lin_srgb = apply_cmatrix(lin_rgb, Cam2sRGB);
     lin_srgb = max(0,min(lin_srgb,1)); % Always keep image clipped b/w 0-1
     imshow(lin_srgb);
