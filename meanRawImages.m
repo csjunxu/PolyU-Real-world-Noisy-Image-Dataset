@@ -14,7 +14,7 @@ for i = 1:im_num
     fprintf('Processing %s. \n', rawname);
     meanRaw = meanRaw + raw;    
 end
-meanRaw = meanRaw./im_num;
+meanRaw = round(meanRaw./im_num);
 imwrite(meanRaw,'mean_Scene1_ARW_DNG_TIF.tiff');
 
 %% mean of dark frames
@@ -38,7 +38,6 @@ imwrite(meanRaw,'mean_DF_ARW_DNG_TIF.tiff');
 %% mean Scene minus mean DF
 meanGT = meanRaw - meanDF;
 imwrite(meanGT,'mean_GT_ARW_DNG_TIF.tiff');
-
 
 
 
