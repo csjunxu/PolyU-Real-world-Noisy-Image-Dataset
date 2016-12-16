@@ -11,8 +11,8 @@ for i = 1:im_num
     fprintf('%s : \n',rawname);
     
     %% 1 Linearization
-    black = 0;
-    saturation = 16383;
+    black = 512;
+    saturation = 16300;
     lin_bayer = (raw-black)/(saturation-black); % 归一化至[0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % 确保没有大于1或小于0的数据;
     imshow(lin_bayer);
@@ -46,6 +46,6 @@ for i = 1:im_num
     bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
     nl_srgb = bright_srgb.^(1/2.2);
     imshow(nl_srgb);
-    imwrite(nl_srgb,[rawname '_ARW_DNG_TIF.png']);
+    imwrite(nl_srgb,['20161214/' rawname '_ARW_DNG_TIF.png']);
 end
 
