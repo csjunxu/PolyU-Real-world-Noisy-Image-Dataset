@@ -1,6 +1,7 @@
 clear;
-Original_image_dir = '20161214/';
-fpath = fullfile(Original_image_dir, '*.tiff');
+% Original_image_dir = '20161214/';
+Original_image_dir = './';
+fpath = fullfile(Original_image_dir, 'DSC01613.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
 for i = 1:im_num
@@ -11,14 +12,16 @@ for i = 1:im_num
     fprintf('%s : \n',rawname);
     
     %% 1 Linearization
+%     system('dcraw -v -T C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
     black = 512;
     saturation = 16300;
     lin_bayer = (raw-black)/(saturation-black); % 归一化至[0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % 确保没有大于1或小于0的数据;
     imshow(lin_bayer);
-    
+     
     %% 2 White Balancing
-    wb_multipliers = [1.902345, 1, 1.808593]; % for particular condition, from dcraw;
+    %     system('dcraw -v -w C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
+    wb_multipliers = [2.234377, 1, 1.460938]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
     imshow(balanced_bayer);
@@ -46,6 +49,6 @@ for i = 1:im_num
     bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
     nl_srgb = bright_srgb.^(1/2.2);
     imshow(nl_srgb);
-    imwrite(nl_srgb,['20161214/' rawname '_ARW_DNG_TIF.png']);
+    imwrite(nl_srgb,['./' rawname '_ARW_DNG_TIF.png']);
 end
 
