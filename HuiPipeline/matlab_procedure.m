@@ -3,7 +3,8 @@ close all;
 warning('off');
 
 addpath(genpath(pwd));
-return1=system('D:/establishdataset/dcraw/dcraw -a -T -4 D:\establishdataset\数据\adobe_DNG\DSC00060.ARW');
+return1=system('C:\Users\csjunxu\Desktop\Projects\RID_Dataset\dcraw -a -T -4 C:\Users\csjunxu\Desktop\Projects\RID_Dataset\HuiPipeline\DSC01381.ARW');
+% return1=system('../dcraw -a -T -4 ../20161214/DSC01381.ARW');
 hdr=double(importdata('.\数据\adobe_DNG\DJI_0029.tiff'));
 % % hdr=importdata('.\数据\adobe_DNG\DJI_0029fujia.tiff');
 maxSize=780;
