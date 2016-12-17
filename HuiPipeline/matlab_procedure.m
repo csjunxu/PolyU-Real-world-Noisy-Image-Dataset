@@ -1,19 +1,18 @@
 clear all;
 close all;
 warning('off');
-
+ 
 addpath(genpath(pwd));
-return1=system('C:\Users\csjunxu\Desktop\Projects\RID_Dataset\dcraw -a -T -4 C:\Users\csjunxu\Desktop\Projects\RID_Dataset\HuiPipeline\DSC01613.ARW');
-% return1=system('../dcraw -a -T -4 ../20161214/DSC01381.ARW');
+return1=system('C:\Users\csjunxu\Desktop\Projects\RID_Dataset\dcraw -T -4 C:\Users\csjunxu\Desktop\Projects\RID_Dataset\HuiPipeline\DSC01616.ARW');
+% return1=system('../dcraw -a -T -4 ../20161214/DSC01381.ARW'); 
 hdr=double(importdata('DSC00060.tiff'));
-% % hdr=importdata('.\数据\adobe_DNG\DJI_0029fujia.tiff');
+% hdr=importdata('.\数据\adobe_DNG\DJI_0029fujia.tiff');
 maxSize=780;
 if max(size(hdr)) > maxSize
     ratio = max(size(hdr,1),size(hdr,2))/ maxSize;
     Ori = imresize(hdr, 1/ratio,'bilinear');
 else
     Ori=hdr;
-    
 end
 
 [w,l,col]=size(Ori);
