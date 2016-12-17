@@ -5,7 +5,7 @@ warning('off');
 addpath(genpath(pwd));
 return1=system('C:\Users\csjunxu\Desktop\Projects\RID_Dataset\dcraw -a -T -4 C:\Users\csjunxu\Desktop\Projects\RID_Dataset\HuiPipeline\DSC01613.ARW');
 % return1=system('../dcraw -a -T -4 ../20161214/DSC01381.ARW');
-hdr=double(importdata('.\数据\adobe_DNG\DJI_0029.tiff'));
+hdr=double(importdata('DSC00060.tiff'));
 % % hdr=importdata('.\数据\adobe_DNG\DJI_0029fujia.tiff');
 maxSize=780;
 if max(size(hdr)) > maxSize
