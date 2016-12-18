@@ -15,7 +15,7 @@ for i = 1:im_num
 %     system('dcraw -v -T C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
     black = 512;
     saturation = 16300;
-    lin_bayer = (raw-black)/(saturation-black); % 归一化至[0,1];
+    lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % 确保没有大于1或小于0的数据;
     imshow(lin_bayer);
      
