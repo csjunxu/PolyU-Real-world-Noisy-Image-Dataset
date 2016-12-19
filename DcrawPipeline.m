@@ -33,7 +33,7 @@ for i = 1:im_num
     
     %% 4 Color Space Conversion
     sRGB2XYZ = [0.4124564 0.3575761 0.1804375;0.2126729 0.7151522 0.0721750;0.0193339 0.1191920 0.9503041];
-    % sRGB2XYZ is an unchanged standard
+     % sRGB2XYZ is an unchanged standard
     XYZ2Cam = [5271 -712 -347;-6153 13653 2763;-1601 2366 7242]/10000;
     % Here XYZ2Cam is only for Nikon D3X, can be found in adobe_coeff in dcraw.c
     sRGB2Cam = XYZ2Cam * sRGB2XYZ;
