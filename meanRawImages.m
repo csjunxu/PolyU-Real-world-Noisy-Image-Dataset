@@ -1,6 +1,6 @@
 clear;
 %% mean of raw images
-Original_image_dir = '20161214/';
+Original_image_dir = '20161219/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -14,8 +14,8 @@ for i = 1:im_num
     fprintf('Processing %s. \n', rawname);
     meanRaw = meanRaw + raw;    
 end
-meanRaw = round(meanRaw./im_num);
-imwrite(meanRaw,'mean_Scene1_ARW_DNG_TIF.tiff');
+meanRaw = meanRaw./im_num;
+imwrite(meanRaw,'mean_Scene1_ARW2TIF.tiff');
 
 %% mean of dark frames
 Original_image_dir = '20161213/';
@@ -32,7 +32,7 @@ for i = 1:im_num
     fprintf('Processing %s. \n', rawname);
     meanDF = meanDF + raw;    
 end
-meanDF = meanDF./im_num;
+meanDF = round(meanDF./im_num);
 imwrite(meanRaw,'mean_DF_ARW_DNG_TIF.tiff');
 
 %% mean Scene minus mean DF
