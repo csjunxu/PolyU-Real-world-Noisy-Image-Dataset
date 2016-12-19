@@ -1,0 +1,1 @@
+for /r C:\Users\csjunxu\Desktop\Projects\RID_Dataset\20161219DF\ %%i in (*.ARW) do dcraw -4 -T -D -v %%i
