@@ -12,9 +12,10 @@ for i = 1:im_num
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
     fprintf('Processing %s. \n', rawname);
-    meanRaw = meanRaw + raw;    
+    meanRaw = meanRaw + raw;
 end
 meanRaw = meanRaw./im_num;
+imshow(meanRaw);
 imwrite(meanRaw,'mean_Scene1_ARW2TIF.tiff');
 
 %% mean of dark frames
@@ -30,7 +31,7 @@ for i = 1:im_num
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
     fprintf('Processing %s. \n', rawname);
-    meanDF = meanDF + raw;    
+    meanDF = meanDF + raw;
 end
 meanDF = round(meanDF./im_num);
 imwrite(meanRaw,'mean_DF_ARW_DNG_TIF.tiff');
