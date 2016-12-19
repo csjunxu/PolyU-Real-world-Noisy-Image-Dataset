@@ -14,8 +14,7 @@ for i = 1:im_num
     fprintf('Processing %s. \n', rawname);
     meanRaw = meanRaw + raw;
 end
-meanRaw = round(meanRaw./im_num);
-meanRaw = uint16(meanRaw);
+meansRGB = uint16(meansRGB./im_num);
 imshow(meanRaw);
 imwrite(meanRaw,'mean_RAW_ARW2TIF.tiff');
 clear raw meanRaw;
