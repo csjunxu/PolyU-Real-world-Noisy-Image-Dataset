@@ -14,8 +14,7 @@ for i = 1:im_num
     fprintf('Processing %s. \n', rawname);
     meansRGB = meansRGB + sRGB;
 end
-meansRGB = round(meansRGB./im_num);
-meansRGB = uint16(meansRGB);
+meansRGB = uint8(meansRGB./im_num);
 imshow(meansRGB);
 imwrite(meansRGB,'mean_sRGB_ARW2TIF.png');
 clear sRGB meansRGB;
