@@ -18,8 +18,8 @@ for i = 1:im_num
     fprintf('Processing %s. \n', rawname);
     PSNR_raw = [PSNR_raw csnr( IMin,RAW_GT, 0, 0 )];
     SSIM_raw = [SSIM_raw cal_ssim( IMin, RAW_GT, 0, 0 )];
-    PSNR_sRGB = [PSNR_sRGB csnr( IMin,RAW_GT, 0, 0 )];
-    SSIM_sRGB = [SSIM_sRGB cal_ssim( IMin, RAW_GT, 0, 0 )];
+    PSNR_sRGB = [PSNR_sRGB csnr( IMin,sRGB_GT, 0, 0 )];
+    SSIM_sRGB = [SSIM_sRGB cal_ssim( IMin, sRGB_GT, 0, 0 )];
     fprintf('The PSNR_raw = %2.4f, SSIM_raw = %2.4f. \n', PSNR_raw(end), SSIM_raw(end));
     fprintf('The PSNR_sRGB = %2.4f, SSIM_sRGB = %2.4f. \n', PSNR_sRGB(end), SSIM_sRGB(end));
 end
