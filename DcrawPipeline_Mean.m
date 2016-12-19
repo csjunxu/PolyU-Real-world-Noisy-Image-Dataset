@@ -1,6 +1,6 @@
 clear;
 Original_image_dir = './';
-fpath = fullfile(Original_image_dir, 'mean_Scene1_ARW2TIF.tiff');
+fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
 for i = 1:im_num
@@ -17,7 +17,7 @@ for i = 1:im_num
     lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % no value larger than 1 or less than 0;
     imshow(lin_bayer);
-      
+     
     %% 2 White Balancing
     %     system('dcraw -v -w C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
     wb_multipliers = [1.863281, 1, 1.730469]; % for particular condition, from dcraw;
@@ -48,6 +48,6 @@ for i = 1:im_num
     bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
     nl_srgb = bright_srgb.^(1/2.2);
     imshow(nl_srgb);
-    imwrite(nl_srgb,['20161219/' rawname '_ARW2TIF.png']);
+    imwrite(nl_srgb,[rawname '_TIF2PNG.png']);
 end
 
