@@ -13,8 +13,7 @@ for i = 1:im_num
     fprintf('Processing %s. \n', rawname);
     meanDF = meanDF + rawDF;
 end
-meanDF = round(meanDF./im_num);
-meanDF = uint16(meanDF);
+meanDF = uint16(meanDF./im_num);
 imshow(meanDF);
 imwrite(meanDF,'mean_DF_ARW2TIF.tiff');
 clear rawDF meanDF;
