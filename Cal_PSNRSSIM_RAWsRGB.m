@@ -6,6 +6,7 @@ im_dir  = dir(fpath);
 im_num = length(im_dir);
 RAW_GT = imread('mean_RAW_ARW2TIF_TIF2PNG.png');
 sRGB_GT = imread('mean_RAW_ARW2TIF_TIF2PNG.png');
+fprintf('The PSNR/SSIM of sRGB_GT and RAW_GT are %2.4f/%2.4f. \n', csnr( sRGB_GT,RAW_GT, 0, 0 ), cal_ssim( sRGB_GT, sRGB_GT, 0, 0 ));
 PSNR_raw = [];
 SSIM_raw = [];
 PSNR_sRGB = [];
