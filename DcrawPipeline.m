@@ -1,7 +1,7 @@
 clear;
-% Original_image_dir = '20161214/';
-Original_image_dir = './';
-fpath = fullfile(Original_image_dir, 'DSC01613.tiff');
+Original_image_dir = '20161219/';
+% Original_image_dir = './';
+fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
 for i = 1:im_num
@@ -13,7 +13,7 @@ for i = 1:im_num
     
     %% 1 Linearization
 %     system('dcraw -v -T C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
-    black = 512;
+    black = 128;
     saturation = 16300;
     lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % no value larger than 1 or less than 0;
