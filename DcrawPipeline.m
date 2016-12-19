@@ -25,7 +25,7 @@ for i = 1:im_num
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
     imshow(balanced_bayer);
-     
+    
     %% 3 Demosaicking
     temp = uint16(balanced_bayer/max(balanced_bayer(:)) * (2^16-1));
     lin_rgb = double(demosaic(temp,'rggb'))/(2^16-1);
@@ -34,7 +34,7 @@ for i = 1:im_num
     %% 4 Color Space Conversion
     sRGB2XYZ = [0.4124564 0.3575761 0.1804375;0.2126729 0.7151522 0.0721750;0.0193339 0.1191920 0.9503041];
     % sRGB2XYZ is an unchanged standard
-    XYZ2Cam = [5271,-712,-347,-6153,13653,2763,-1601,2366,7242]/10000; % Sony ILCE-7M2
+    XYZ2Cam = [5271 -712 -347;-6153 13653 2763;-1601 2366 7242]/10000;
     % Here XYZ2Cam is only for Nikon D3X, can be found in adobe_coeff in dcraw.c
     sRGB2Cam = XYZ2Cam * sRGB2XYZ;
     sRGB2Cam = sRGB2Cam./ repmat(sum(sRGB2Cam,2),1,3); % normalize each rows of sRGB2Cam to 1
