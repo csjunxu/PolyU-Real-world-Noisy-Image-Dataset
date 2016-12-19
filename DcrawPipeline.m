@@ -14,14 +14,14 @@ for i = 1:im_num
     %% 1 Linearization
 %     system('dcraw -v -T C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
     black = 128;
-    saturation = 16300;
+    saturation = 4095;
     lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % no value larger than 1 or less than 0;
     imshow(lin_bayer);
      
     %% 2 White Balancing
     %     system('dcraw -v -w C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
-    wb_multipliers = [2.234377, 1, 1.460938]; % for particular condition, from dcraw;
+    wb_multipliers = [2.758397, 1, 1.238742]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
     imshow(balanced_bayer);
