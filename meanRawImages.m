@@ -23,7 +23,7 @@ Original_image_dir = '20161213/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
-raw = double(imread(fullfile(Original_image_dir, im_dir(1).name)));
+raw = imread(fullfile(Original_image_dir, im_dir(1).name));
 meanDF = zeros(size(raw));
 for i = 1:im_num
     %% 0 read the tiff image
