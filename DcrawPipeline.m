@@ -1,5 +1,5 @@
 clear;
-Original_image_dir = '20161219/';
+Original_image_dir = '20161220/';
 % Original_image_dir = '20161219DF/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
