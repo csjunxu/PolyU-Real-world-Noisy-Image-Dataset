@@ -1,5 +1,5 @@
 %% mean of dark frames
-Original_image_dir = '20161219DF/';
+Original_image_dir = '20161220DF/';
 fpath = fullfile(Original_image_dir, '*.pgm');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
