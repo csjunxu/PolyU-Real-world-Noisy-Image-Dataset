@@ -16,7 +16,7 @@ for i = 1:im_num
 end
 meansRGB = uint16(meansRGB./im_num);
 imshow(meanRaw);
-imwrite(meanRaw,'mean_RAW_ARW2TIF.tiff');
+imwrite(meanRaw,'meanRAW_ARW2TIF.tiff');
 clear raw meanRaw;
 
 
