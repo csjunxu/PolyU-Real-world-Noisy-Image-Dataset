@@ -1,5 +1,5 @@
 clear;
-Original_image_dir = '20161220/';
+Original_image_dir = '20161221/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -20,7 +20,7 @@ for i = 1:im_num
      
     %% 2 White Balancing
     %     system('dcraw -v -w C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
-    wb_multipliers = [2.113281, 1, 1.859375]; % for particular condition, from dcraw;
+    wb_multipliers = [1.605469, 1, 2.144531]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
     imshow(balanced_bayer);
