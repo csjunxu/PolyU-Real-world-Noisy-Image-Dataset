@@ -1,6 +1,5 @@
 clear;
 Original_image_dir = '20161220/';
-% Original_image_dir = '20161219DF/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -49,6 +48,6 @@ for i = 1:im_num
     bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
     nl_srgb = bright_srgb.^(1/2.2);
     imshow(nl_srgb);
-    imwrite(nl_srgb,['20161220/' rawname '_TIF2PNG.png']);
+    imwrite(nl_srgb,[Original_image_dir rawname '_TIF2PNG.png']);
 end
 
