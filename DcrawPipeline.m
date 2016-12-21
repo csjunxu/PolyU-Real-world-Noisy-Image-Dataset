@@ -21,7 +21,7 @@ for i = 1:im_num
      
     %% 2 White Balancing
     %     system('dcraw -v -w C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
-    wb_multipliers = [1.863281, 1, 1.730469]; % for particular condition, from dcraw;
+    wb_multipliers = [2.113281, 1, 1.859375]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
     imshow(balanced_bayer);
