@@ -15,5 +15,5 @@ for i = 1:im_num
 end
 meanDF = uint16(meanDF./im_num);
 imshow(meanDF);
-imwrite(meanDF,'mean_DF_ARW2TIF.tiff');
+imwrite(meanDF,'meanDF_ARW2TIF.tiff');
 clear rawDF meanDF;
