@@ -16,7 +16,7 @@ for i = 1:im_num
 end
 meansRGB = uint8(meansRGB./im_num);
 imshow(meansRGB);
-imwrite(meansRGB,'20161221mean/sRGBGT_ARW2TIF_TIF2PNG.png');
+imwrite(meansRGB,'20161221mean/meansRGB_ARW2TIF_TIF2PNG.png');
 clear sRGB meansRGB;
 
 
