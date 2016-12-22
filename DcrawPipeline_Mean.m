@@ -1,6 +1,6 @@
 clear;
 Original_image_dir = '20161221mean/';
-fpath = fullfile(Original_image_dir, 'meanRawGT*.tiff');
+fpath = fullfile(Original_image_dir, 'RawGT*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
 for i = 1:im_num
