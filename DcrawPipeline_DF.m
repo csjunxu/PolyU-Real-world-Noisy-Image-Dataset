@@ -11,7 +11,6 @@ for i = 1:im_num
     fprintf('%s : \n',rawname);
     
     %% 1 Linearization
-    %     system('dcraw -v -T C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
     black = 128;
     saturation = 4095;
     lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
@@ -19,7 +18,6 @@ for i = 1:im_num
     imshow(lin_bayer);
     
     %% 2 White Balancing
-    %     system('dcraw -v -w C:\Users\csjunxu\Desktop\Projects\RID_Dataset\checkparameters\DSC01613.ARW');
     wb_multipliers = [2.132813, 1, 1.730469]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
@@ -100,6 +98,6 @@ for i = 1:im_num
     bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
     nl_srgb = bright_srgb.^(1/2.2);
     imshow(nl_srgb);
-    imwrite(nl_srgb,[Original_image_dir rawname '_TIFF2PNG.png']);
+    imwrite(nl_srgb,[Original_image_dir rawname '_TIF2PNG.png']);
 end
 
