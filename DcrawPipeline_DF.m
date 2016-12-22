@@ -1,5 +1,5 @@
 clear;
-Original_image_dir = '20161220DF/';
+Original_image_dir = '20161221DF/';
 fpath = fullfile(Original_image_dir, '*.pgm');
 im_dir  = dir(fpath);
 im_num = length(im_dir);

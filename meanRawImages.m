@@ -1,6 +1,6 @@
 clear;
 %% mean of raw images
-Original_image_dir = '20161221/';
+Original_image_dir = '20161220/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -16,7 +16,7 @@ for i = 1:im_num
 end
 meanRaw = uint16(meanRaw./im_num);
 imshow(meanRaw);
-imwrite(meanRaw,['20161221mean/meanRAW_ARW2TIF.tiff']);
+imwrite(meanRaw,['20161220mean/meanRAW_ARW2TIF.tiff']);
 clear raw meanRaw;
 
 
