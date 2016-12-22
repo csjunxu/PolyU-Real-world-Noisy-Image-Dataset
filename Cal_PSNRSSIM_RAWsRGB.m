@@ -28,7 +28,7 @@ mPSNR_raw = mean(PSNR_raw);
 mSSIM_raw = mean(SSIM_raw);
 mPSNR_sRGB = mean(PSNR_sRGB);
 mSSIM_sRGB = mean(SSIM_sRGB);
-savename = ['PSNRSSIM_RawGT_vs_sRGBGT_20161221_ISO3200.mat'];
+savename = ['PSNRSSIM_RawGT_vs_meansRGB_20161221_ISO3200.mat'];
 save(savename, 'mPSNR_raw', 'mSSIM_raw', 'PSNR_raw', 'SSIM_raw', 'mPSNR_sRGB', 'mSSIM_sRGB', 'PSNR_sRGB', 'SSIM_sRGB');
 
 fpath = fullfile(Original_image_dir, '*.png');
