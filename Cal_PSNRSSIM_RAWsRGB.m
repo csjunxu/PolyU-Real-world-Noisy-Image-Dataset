@@ -4,8 +4,8 @@ Original_image_dir = '20161223/';
 fpath = fullfile(Original_image_dir, '*.png');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
-RAW_GT = imread('20161222mean/meanRAW_ARW2TIF_TIF2PNG.png');
-sRGB_GT = imread('20161222mean/meansRGB_ARW2TIF_TIF2PNG.png');
+RAW_GT = imread('20161223mean/meanRAW_ARW2TIF_TIF2PNG.png');
+sRGB_GT = imread('20161223mean/meansRGB_ARW2TIF_TIF2PNG.png');
 fprintf('The PSNR/SSIM of meanRAW and meansRGB are %2.4f/%2.4f. \n', csnr( sRGB_GT,RAW_GT, 0, 0 ), cal_ssim( sRGB_GT, sRGB_GT, 0, 0 ));
 PSNR_raw = [];
 SSIM_raw = [];
@@ -28,11 +28,11 @@ mPSNR_raw = mean(PSNR_raw);
 mSSIM_raw = mean(SSIM_raw);
 mPSNR_sRGB = mean(PSNR_sRGB);
 mSSIM_sRGB = mean(SSIM_sRGB);
-savename = ['PSNRSSIM_meanRAW_vs_meansRGB_20161222_ISO6400.mat'];
+savename = ['PSNRSSIM_meanRAW_vs_meansRGB_20161223_ISO1600.mat'];
 save(savename, 'mPSNR_raw', 'mSSIM_raw', 'PSNR_raw', 'SSIM_raw', 'mPSNR_sRGB', 'mSSIM_sRGB', 'PSNR_sRGB', 'SSIM_sRGB');
 
-RAW_GT = imread('20161222mean/RawGT_ARW2TIF_TIF2PNG.png');
-sRGB_GT = imread('20161222mean/meansRGB_ARW2TIF_TIF2PNG.png');
+RAW_GT = imread('20161223mean/RawGT_ARW2TIF_TIF2PNG.png');
+sRGB_GT = imread('20161223mean/meansRGB_ARW2TIF_TIF2PNG.png');
 fprintf('The PSNR/SSIM of RAW_GT and meansRGB are %2.4f/%2.4f. \n', csnr( sRGB_GT,RAW_GT, 0, 0 ), cal_ssim( sRGB_GT, sRGB_GT, 0, 0 ));
 PSNR_raw = [];
 SSIM_raw = [];
@@ -55,7 +55,7 @@ mPSNR_raw = mean(PSNR_raw);
 mSSIM_raw = mean(SSIM_raw);
 mPSNR_sRGB = mean(PSNR_sRGB);
 mSSIM_sRGB = mean(SSIM_sRGB);
-savename = ['PSNRSSIM_RawGT_vs_meansRGB_20161222_ISO6400.mat'];
+savename = ['PSNRSSIM_RawGT_vs_meansRGB_20161223_ISO1600.mat'];
 save(savename, 'mPSNR_raw', 'mSSIM_raw', 'PSNR_raw', 'SSIM_raw', 'mPSNR_sRGB', 'mSSIM_sRGB', 'PSNR_sRGB', 'SSIM_sRGB');
 
 
