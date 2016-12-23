@@ -1,1 +1,1 @@
-for /r C:\Users\csjunxu\Desktop\Projects\RID_Dataset\20161221\ %%i in (*.ARW) do dcraw -4 -T -D -v %%i
+for /r C:\Users\csjunxu\Desktop\Projects\RID_Dataset\20161222\ %%i in (*.ARW) do dcraw -4 -T -D -v %%i
