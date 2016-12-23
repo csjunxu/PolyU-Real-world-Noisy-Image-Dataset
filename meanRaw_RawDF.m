@@ -1,6 +1,6 @@
 %% mean Scene minus mean DF
 % 128 is the reset value for Sony A7 II 
-Original_image_dir = '20161222mean/';
+Original_image_dir = '20161223mean/';
 reset = 128;
 meanRaw = imread([Original_image_dir 'meanRAW_ARW2TIF.tiff']);
 meanDFTIF = imread([Original_image_dir 'meanDF_ARW2TIF.tiff']);
