@@ -1,6 +1,6 @@
 clear;
 %% mean of raw images
-Original_image_dir = '20161221/';
+Original_image_dir = '20161222/';
 fpath = fullfile(Original_image_dir, '*.png');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -16,7 +16,7 @@ for i = 1:im_num
 end
 meansRGB = uint8(meansRGB./im_num);
 imshow(meansRGB);
-imwrite(meansRGB,'20161221mean/meansRGB_ARW2TIF_TIF2PNG.png');
+imwrite(meansRGB,'20161222mean/meansRGB_ARW2TIF_TIF2PNG.png');
 clear sRGB meansRGB;
 
 
