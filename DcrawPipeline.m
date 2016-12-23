@@ -1,5 +1,5 @@
 clear;
-Original_image_dir = '20161221/';
+Original_image_dir = '20161222/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -18,7 +18,8 @@ for i = 1:im_num
     imshow(lin_bayer);
     
     %% 2 White Balancing
-    wb_multipliers = [1.605469, 1, 2.144531]; % for particular condition, from dcraw;
+    % iso=3200: [1.605469, 1, 2.144531]
+    wb_multipliers = [2.758397, 1, 1.238742]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
     imshow(balanced_bayer);
