@@ -2,11 +2,14 @@
 FlexISP: A Flexible Camera Image Processing Framework
 Felix Heide (UBC), Markus Steinberger (TU Graz), Yun-Ta Tsai (NVIDIA), Mushfiqur Rouf (UBC), Dawid Paj?k (NVIDIA), Dikpal Reddy (NVIDIA), Orazio Gallo (NVIDIA), Jing Liu (UC Santa Cruz), Wolfgang Heidrich (KAUST), Karen Egiazarian (TUT), Jan Kautz (NVIDIA), Kari Pulli (NVIDIA), 
 in Proc. ACM SIGGRAPH Asia, December 2014.
+https://research.nvidia.com/publication/flexisp-flexible-camera-image-processing-framework
 
 2. 
 Karaimer H.C., Brown M.S. (2016) 
 ¡°A Software Platform for Manipulating the Camera Imaging Pipeline¡±, 
 European Conference on Computer Vision (ECCV`16), Oct 2016.
+https://karaimer.github.io/camera-pipeline/
 
 3. 
 A New In-Camera Imaging Model for Color Computer Vision and its Application, TPAMI, 2012.
+http://www.comp.nus.edu.sg/~brown/radiometric_calibration/
