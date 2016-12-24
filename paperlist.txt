@@ -1,0 +1,3 @@
+"FlexISP: A Flexible Camera Image Processing Framework"
+Felix Heide (UBC), Markus Steinberger (TU Graz), Yun-Ta Tsai (NVIDIA), Mushfiqur Rouf (UBC), Dawid Paj?k (NVIDIA), Dikpal Reddy (NVIDIA), Orazio Gallo (NVIDIA), Jing Liu (UC Santa Cruz), Wolfgang Heidrich (KAUST), Karen Egiazarian (TUT), Jan Kautz (NVIDIA), Kari Pulli (NVIDIA), 
+in Proc. ACM SIGGRAPH Asia, December 2014
