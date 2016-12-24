@@ -27,15 +27,20 @@ for i = 1:im_num
     SSIM_RAWGT = [SSIM_RAWGT cal_ssim( IMin, RAWGT, 0, 0 )];
     PSNR_meansRGB = [PSNR_meansRGB csnr( IMin,meansRGB, 0, 0 )];
     SSIM_meansRGB = [SSIM_meansRGB cal_ssim( IMin, meansRGB, 0, 0 )];
-    fprintf('The PSNR_raw = %2.4f, SSIM_raw = %2.4f. \n', PSNR_meanRAW(end), SSIM_meanRAW(end));
+    fprintf('The PSNR_meanRAW = %2.4f, SSIM_meanRAW = %2.4f. \n', PSNR_meanRAW(end), SSIM_meanRAW(end));
+    fprintf('The PSNR_RAWGT = %2.4f, SSIM_RAWGT = %2.4f. \n', PSNR_RAWGT(end), SSIM_RAWGT(end));
     fprintf('The PSNR_sRGB = %2.4f, SSIM_sRGB = %2.4f. \n', PSNR_meansRGB(end), SSIM_meansRGB(end));
 end
-mPSNR_raw = mean(PSNR_meanRAW);
-mSSIM_raw = mean(SSIM_meanRAW);
-mPSNR_sRGB = mean(PSNR_meansRGB);
-mSSIM_sRGB = mean(SSIM_meansRGB);
+mPSNR_meanRAW = mean(PSNR_meanRAW);
+mSSIM_meanRAW = mean(SSIM_meanRAW);
+mPSNR_RAWGT = mean(PSNR_RAWGT);
+mSSIM_RAWGT = mean(SSIM_RAWGT);
+mPSNR_meansRGB = mean(PSNR_meansRGB);
+mSSIM_meansRGB = mean(SSIM_meansRGB);
 savename = ['PSNRSSIM_meanRAW_vs_meansRGB_20161223_ISO1600.mat'];
-save(savename, 'mPSNR_raw', 'mSSIM_raw', 'PSNR_raw', 'SSIM_raw', 'mPSNR_sRGB', 'mSSIM_sRGB', 'PSNR_sRGB', 'SSIM_sRGB');
+save(savename, 'mPSNR_meanRAW', 'mSSIM_meanRAW', 'PSNR_meanRAW', 'SSIM_meanRAW',...
+    'mPSNR_RAWGT', 'mSSIM_RAWGT', 'PSNR_RAWGT', 'SSIM_RAWGT',...
+    'mPSNR_meansRGB','mSSIM_meansRGB','PSNR_meansRGB','SSIM_meansRGB');
 
 
 
