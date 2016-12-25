@@ -1,5 +1,5 @@
 %% mean of dark frames
-Original_image_dir = '20161223DF/';
+Original_image_dir = '20161220DF/';
 fpath = fullfile(Original_image_dir, '*.pgm');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -15,7 +15,7 @@ for i = 1:im_num
 end
 meanDF = uint16(meanDF./im_num);
 imshow(meanDF);
-imwrite(meanDF,['20161223mean/meanDF_ARW2pgm.pgm']);
+imwrite(meanDF,['20161220mean/meanDF_ARW2pgm.pgm']);
 clear rawDF meanDF;
 
 fpath = fullfile(Original_image_dir, '*.tiff');
@@ -33,5 +33,5 @@ for i = 1:im_num
 end
 meanDF = uint16(meanDF./im_num);
 imshow(meanDF);
-imwrite(meanDF,['20161223mean/meanDF_ARW2TIF.tiff']);
+imwrite(meanDF,['20161220mean/meanDF_ARW2TIF.tiff']);
 clear rawDF meanDF;
