@@ -7,8 +7,8 @@ im_num = length(im_dir);
 meanRAW = imread('20161219mean/meanRAW_ARW2TIF_TIF2PNG.png');
 RAWGT = imread('20161219mean/RawGT_ARW2TIF_TIF2PNG.png');
 meansRGB = imread('20161219mean/meansRGB_ARW2TIF_TIF2PNG.png');
-fprintf('The PSNR/SSIM of meanRAW and meansRGB are %2.4f/%2.4f. \n', csnr( meansRGB,meanRAW, 0, 0 ), cal_ssim( meansRGB, meanRAW, 0, 0 ));
-fprintf('The PSNR/SSIM of RAW_GT and meansRGB are %2.4f/%2.4f. \n', csnr( meansRGB,RAWGT, 0, 0 ), cal_ssim( meansRGB, RAWGT, 0, 0 ));
+fprintf('The PSNR/SSIM of meanRAW/meansRGB are %2.4f/%2.4f. \n', csnr( meansRGB,meanRAW, 0, 0 ), cal_ssim( meansRGB, meanRAW, 0, 0 ));
+fprintf('The PSNR/SSIM of RAW_GT/meansRGB are %2.4f/%2.4f. \n', csnr( meansRGB,RAWGT, 0, 0 ), cal_ssim( meansRGB, RAWGT, 0, 0 ));
 PSNR_meanRAW = [];
 SSIM_meanRAW = [];
 PSNR_RAWGT = [];
@@ -27,9 +27,9 @@ for i = 1:im_num
     SSIM_RAWGT = [SSIM_RAWGT cal_ssim( IMin, RAWGT, 0, 0 )];
     PSNR_meansRGB = [PSNR_meansRGB csnr( IMin,meansRGB, 0, 0 )];
     SSIM_meansRGB = [SSIM_meansRGB cal_ssim( IMin, meansRGB, 0, 0 )];
-    fprintf('The PSNR_meanRAW = %2.4f, SSIM_meanRAW = %2.4f. \n', PSNR_meanRAW(end), SSIM_meanRAW(end));
-    fprintf('The PSNR_RAWGT = %2.4f, SSIM_RAWGT = %2.4f. \n', PSNR_RAWGT(end), SSIM_RAWGT(end));
-    fprintf('The PSNR_sRGB = %2.4f, SSIM_sRGB = %2.4f. \n', PSNR_meansRGB(end), SSIM_meansRGB(end));
+    fprintf('The PSNR/SSIM of meanRAW are %2.4f/%2.4f. \n', PSNR_meanRAW(end), SSIM_meanRAW(end));
+    fprintf('The PSNR/SSIM of RAWGT are %2.4f/%2.4f. \n', PSNR_RAWGT(end), SSIM_RAWGT(end));
+    fprintf('The PSNR/SSIM of  meansRGB are %2.4f/%2.4f. \n', PSNR_meansRGB(end), SSIM_meansRGB(end));
 end
 mPSNR_meanRAW = mean(PSNR_meanRAW);
 mSSIM_meanRAW = mean(SSIM_meanRAW);
