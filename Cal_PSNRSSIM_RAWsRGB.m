@@ -37,7 +37,7 @@ mPSNR_RAWGT = mean(PSNR_RAWGT);
 mSSIM_RAWGT = mean(SSIM_RAWGT);
 mPSNR_meansRGB = mean(PSNR_meansRGB);
 mSSIM_meansRGB = mean(SSIM_meansRGB);
-savename = ['PSNRSSIM_meanRAW_RAWGT_meansRGB_20161219_ISO25600.mat'];
+savename = ['PSNRSSIM_meanRAW_RAWGT_meansRGB_20161219_ISO100.mat'];
 save(savename, 'mPSNR_meanRAW', 'mSSIM_meanRAW', 'PSNR_meanRAW', 'SSIM_meanRAW',...
     'mPSNR_RAWGT', 'mSSIM_RAWGT', 'PSNR_RAWGT', 'SSIM_RAWGT',...
     'mPSNR_meansRGB','mSSIM_meansRGB','PSNR_meansRGB','SSIM_meansRGB');
