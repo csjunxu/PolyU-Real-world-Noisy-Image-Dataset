@@ -21,11 +21,12 @@ for i = 1:im_num
         meansRGB500 = uint8(meansRGB500./min(500,im_num));
         %         imshow(meansRGB500);
         imwrite(meansRGB500,'20161226mean_ISO3200_5000/meansRGB500_ARW2TIF_TIF2PNG.png');
+        clear meansRGB500;
     end
 end
 meansRGBAll = uint8(meansRGBAll./im_num);
 % imshow(meansRGBAll);
 imwrite(meansRGBAll,'20161226mean_ISO3200_5000/meansRGBAll_ARW2TIF_TIF2PNG.png');
-clear sRGB meansRGBAll meansRGB500;
+clear sRGB meansRGBAll;
 
 
