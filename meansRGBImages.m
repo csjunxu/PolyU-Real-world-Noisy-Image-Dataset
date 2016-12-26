@@ -12,7 +12,7 @@ for i = 1:im_num
     sRGB = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
-    fprintf('Processing %s. \n', rawname);
+%     fprintf('Processing %s. \n', rawname);
     meansRGBAll = meansRGBAll + sRGB;
     meansRGB500 = meansRGB500 + sRGB;
     if i == min(500,im_num)
