@@ -12,12 +12,14 @@ for i = 1:im_num
     Raw = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
-%     fprintf('Processing %s. \n', rawname);
+    %     fprintf('Processing %s. \n', rawname);
     meanRawAll = meanRawAll + Raw;
-    meanRaw500 = meanRaw500 + Raw;
+    if i <= min(500,im_num)
+        meanRaw500 = meanRaw500 + sRGB;
+    end
     if i == min(500,im_num)
         meanRaw500 = uint16(meanRaw500./min(500,im_num));
-        imshow(meanRaw500);
+%         imshow(meanRaw500);
         imwrite(meanRaw500,'20161226mean_ISO3200_5000/meanRaw500_ARW2TIF.tiff');
         clear meanRaw500;
     end
