@@ -28,7 +28,7 @@ for i = 1:min(500,im_num)
     fprintf('Processing %s. \n', rawname);
     meansRGB = meansRGB + sRGB;
 end
-meansRGB = uint8(meansRGB./im_num);
+meansRGB = uint8(meansRGB./min(500,im_num));
 imshow(meansRGB);
 imwrite(meansRGB,'20161226mean_ISO3200_5000/meansRGB500_ARW2TIF_TIF2PNG.png');
 clear sRGB meansRGB;
