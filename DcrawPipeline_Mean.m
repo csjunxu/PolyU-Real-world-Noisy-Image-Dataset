@@ -1,5 +1,5 @@
 clear;
-Original_image_dir = '20161220mean/';
+Original_image_dir = '20161226mean_ISO3200_5000/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -22,7 +22,8 @@ for i = 1:im_num
     % iso=3200: [1.605469, 1, 2.144531] daytime
     % iso=6400: [2.758397, 1, 1.238742] night
     % iso=25600: [2.113281, 1, 1.859375] night
-    wb_multipliers = [2.113281, 1, 1.859375]; % for particular condition, from dcraw;
+    % iso=3200: [1.804688, 1, 1.828125] daytime 20161226
+    wb_multipliers = [1.804688, 1, 1.828125]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
     imshow(balanced_bayer);
