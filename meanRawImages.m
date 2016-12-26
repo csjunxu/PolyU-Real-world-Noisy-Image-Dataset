@@ -35,7 +35,7 @@ for i = 1:min(500,im_num)
     fprintf('Processing %s. \n', rawname);
     meanRaw = meanRaw + raw;
 end
-meanRaw = uint16(meanRaw./im_num);
+meanRaw = uint16(meanRaw./min(500,im_num));
 imshow(meanRaw);
 imwrite(meanRaw,['20161226mean_ISO3200_5000/meanRAW500_ARW2TIF.tiff']);
 clear raw meanRaw;
