@@ -7,23 +7,24 @@ im_num = length(im_dir);
 %% read six mean/GT images
 meansRGB500 = imread([Original_image_dir 'meansRGB500_ARW2TIF_TIF2PNG.png']);
 meansRGBAll = imread([Original_image_dir 'meansRGBAll_ARW2TIF_TIF2PNG.png']);
-meanRAW500 = imread('20161226mean_ISO3200_5000/meanRAW500_ARW2TIF_TIF2PNG.png');
-meanRAWAll = imread('20161226mean_ISO3200_5000/meanRAWAll_ARW2TIF_TIF2PNG.png');
-RAWGT500 = imread('20161226mean_ISO3200_5000/RawGT500_ARW2TIF_TIF2PNG.png');
-RAWGTAll = imread('20161226mean_ISO3200_5000/RawGTAll_ARW2TIF_TIF2PNG.png');
+meanRAW500 = imread([Original_image_dir  'meanRAW500_ARW2TIF_TIF2PNG.png']);
+meanRAWAll = imread([Original_image_dir 'meanRAWAll_ARW2TIF_TIF2PNG.png']);
+RAWGT500 = imread([Original_image_dir 'RawGT500_ARW2TIF_TIF2PNG.png']);
+RAWGTAll = imread([Original_image_dir 'RawGTAll_ARW2TIF_TIF2PNG.png']);
 %% 3 vs 3
-% meanRAW500 vs meansRGBAll
-PSNR_meanRAW500_meansRGBAll = csnr( meanRAW500,meansRGBAll, 0, 0 );
-SSIM_meanRAW500_meansRGBAll = cal_ssim( meanRAW500, meansRGBAll, 0, 0 );
-fprintf('The PSNR/SSIM of meanRAW500 over meansRGBAll are %2.4f/%2.4f. \n', PSNR_meanRAW500_meansRGBAll, SSIM_meanRAW500_meansRGBAll);
-% meanRAW500 vs meanRAWAll 
-PSNR_meanRAW500_meanRAWAll = csnr( meanRAW500,meanRAWAll, 0, 0 );
-SSIM_meanRAW500_meanRAWAll = cal_ssim( meanRAW500, meanRAWAll, 0, 0 );
-fprintf('The PSNR/SSIM of meanRAW500 over meanRAWAll are %2.4f/%2.4f. \n', PSNR_meanRAW500_meanRAWAll, SSIM_meanRAW500_meanRAWAll);
-% meanRAW500 vs RAWGTAll 
-PSNR_meanRAW500_RAWGTAll = csnr( meanRAW500,RAWGTAll, 0, 0 );
-SSIM_meanRAW500_RAWGTAll = cal_ssim( meanRAW500, RAWGTAll, 0, 0 );
-fprintf('The PSNR/SSIM of meanRAW500 over meanRAWAll are %2.4f/%2.4f. \n', PSNR_meanRAW500_RAWGTAll, SSIM_meanRAW500_RAWGTAll);
+
+% meansRGB500 vs meansRGBAll
+PSNR_meansRGB500_meansRGBAll = csnr( meansRGB500, meansRGBAll, 0, 0 );
+SSIM_meansRGB500_meansRGBAll = cal_ssim( meansRGB500, meansRGBAll, 0, 0 );
+fprintf('The PSNR/SSIM of meanRAW500 over meansRGBAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_meansRGBAll, SSIM_meansRGB500_meansRGBAll);
+% meansRGB500 vs meanRAWAll 
+PSNR_meansRGB500_meanRAWAll = csnr( meansRGB500, meanRAWAll, 0, 0 );
+SSIM_meansRGB500_meanRAWAll = cal_ssim( meansRGB500, meanRAWAll, 0, 0 );
+fprintf('The PSNR/SSIM of meanRAW500 over meanRAWAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_meanRAWAll, SSIM_meansRGB500_meanRAWAll);
+% meansRGB500 vs RAWGTAll 
+PSNR_meansRGB500_RAWGTAll = csnr( meansRGB500, RAWGTAll, 0, 0 );
+SSIM_meansRGB500_RAWGTAll = cal_ssim( meansRGB500, RAWGTAll, 0, 0 );
+fprintf('The PSNR/SSIM of meanRAW500 over meanRAWAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_RAWGTAll, SSIM_meansRGB500_RAWGTAll);
 
 % meanRAW500 vs meansRGBAll
 PSNR_meanRAW500_meansRGBAll = csnr( meanRAW500,meansRGBAll, 0, 0 );
@@ -37,6 +38,7 @@ fprintf('The PSNR/SSIM of meanRAW500 over meanRAWAll are %2.4f/%2.4f. \n', PSNR_
 PSNR_meanRAW500_RAWGTAll = csnr( meanRAW500,RAWGTAll, 0, 0 );
 SSIM_meanRAW500_RAWGTAll = cal_ssim( meanRAW500, RAWGTAll, 0, 0 );
 fprintf('The PSNR/SSIM of meanRAW500 over meanRAWAll are %2.4f/%2.4f. \n', PSNR_meanRAW500_RAWGTAll, SSIM_meanRAW500_RAWGTAll);
+
 % 
 PSNR_meansRGB = csnr( IMin,meansRGB, 0, 0 );
 SSIM_meansRGB = cal_ssim( IMin, meansRGB, 0, 0 );
