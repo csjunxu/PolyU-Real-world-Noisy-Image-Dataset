@@ -15,7 +15,7 @@ for i = 1:im_num
     saturation = 4095;
     lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % no value larger than 1 or less than 0;
-    imshow(lin_bayer);
+%     imshow(lin_bayer);
     
     %% 2 White Balancing
     % iso=1600: [2.503906, 1, 1.914063] night
@@ -26,12 +26,12 @@ for i = 1:im_num
     wb_multipliers = [1.804688, 1, 1.828125]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
-    imshow(balanced_bayer);
+%     imshow(balanced_bayer);
     
     %% 3 Demosaicking
     temp = uint16(balanced_bayer/max(balanced_bayer(:)) * (2^16-1));
     lin_rgb = double(demosaic(temp,'rggb'))/(2^16-1);
-    imshow(lin_rgb);
+%     imshow(lin_rgb);
     
     %% 4 Color Space Conversion
     sRGB2XYZ = [0.4124564 0.3575761 0.1804375;0.2126729 0.7151522 0.0721750;0.0193339 0.1191920 0.9503041];
@@ -43,14 +43,14 @@ for i = 1:im_num
     Cam2sRGB = (sRGB2Cam)^-1;
     lin_srgb = apply_cmatrix(lin_rgb, Cam2sRGB);
     lin_srgb = max(0,min(lin_srgb,1)); % Always keep image clipped b/w 0-1
-    imshow(lin_srgb);
+%     imshow(lin_srgb);
     
     %% 5 Brightness and Gamma Correction
     grayim = rgb2gray(lin_srgb); % Consider only gray channel
     grayscale = 0.25/mean(grayim(:));
     bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
     nl_srgb = bright_srgb.^(1/2.2);
-    imshow(nl_srgb);
+%     imshow(nl_srgb);
     imwrite(nl_srgb,[Original_image_dir rawname '_TIF2PNG.png']);
 end
 
