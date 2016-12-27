@@ -10,7 +10,7 @@ for i = 1:im_num
     %% read the tiff image
     rawDF = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     if size(rawDF,1) ~= size(meanDFAll,1)
-        rawDF = rot90(rawDF,3);
+        rawDF = rot90(rawDF,3); % counter-clockwise
     end
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
