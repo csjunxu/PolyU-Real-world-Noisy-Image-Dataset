@@ -25,7 +25,7 @@ for i = 1:im_num
 end
 meanDFAll = uint16(meanDFAll./im_num);
 % imshow(meanDFAll);
-imwrite(meanDFAll,['20161226DF_ISO3200_5000/meanDFAll_ARW2TIF.tiff']);
+imwrite(meanDFAll,['20161226mean_ISO3200_5000/meanDFAll_ARW2TIF.tiff']);
 clear rawDF meanDFAll;
 
 % fpath = fullfile(Original_image_dir, '*.pgm');
