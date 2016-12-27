@@ -15,7 +15,7 @@ for i = 1:im_num
     %     fprintf('Processing %s. \n', rawname);
     meansRGBAll = meansRGBAll + sRGB;
     if i <= min(500,im_num)
-        meansRGB500 = meansRGB500 + sRGB;
+        meansRGB500 = meansRGBAll;
     end
     if i == min(500,im_num)
         meansRGB500 = uint8(meansRGB500./min(500,im_num));
