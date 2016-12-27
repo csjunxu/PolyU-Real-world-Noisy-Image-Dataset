@@ -14,11 +14,8 @@ for i = 1:im_num
     rawname = S{1};
     %     fprintf('Processing %s. \n', rawname);
     meanRawAll = meanRawAll + Raw;
-    if i <= min(500,im_num)
-        meanRaw500 = meanRawAll;
-    end
     if i == min(500,im_num)
-        meanRaw500 = uint16(meanRaw500./min(500,im_num));
+        meanRaw500 = uint16(meanRawAll./min(500,im_num));
 %         imshow(meanRaw500);
         imwrite(meanRaw500,'20161226mean_ISO3200_5000/meanRaw500_ARW2TIF.tiff');
         clear meanRaw500;
