@@ -15,7 +15,7 @@ for i = 1:im_num
     %     fprintf('Processing %s. \n', rawname);
     meanRawAll = meanRawAll + Raw;
     if i <= min(500,im_num)
-        meanRaw500 = meanRaw500 + sRGB;
+        meanRaw500 = meanRawAll;
     end
     if i == min(500,im_num)
         meanRaw500 = uint16(meanRaw500./min(500,im_num));
