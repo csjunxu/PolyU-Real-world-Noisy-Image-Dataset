@@ -16,15 +16,15 @@ meanRAWAll = imread([Original_image_dir 'meanRAWAll_ARW2TIF_TIF2PNG.png']);
 % meansRGB500 vs meansRGBAll
 PSNR_meansRGB500_meansRGBAll = csnr( meansRGB500, meansRGBAll, 0, 0 );
 SSIM_meansRGB500_meansRGBAll = cal_ssim( meansRGB500, meansRGBAll, 0, 0 );
-fprintf('The PSNR/SSIM of meanRAW500 over meansRGBAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_meansRGBAll, SSIM_meansRGB500_meansRGBAll);
+fprintf('The PSNR/SSIM of meansRGB500 over meansRGBAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_meansRGBAll, SSIM_meansRGB500_meansRGBAll);
 % meansRGB500 vs meanRAWAll
 PSNR_meansRGB500_meanRAWAll = csnr( meansRGB500, meanRAWAll, 0, 0 );
 SSIM_meansRGB500_meanRAWAll = cal_ssim( meansRGB500, meanRAWAll, 0, 0 );
-fprintf('The PSNR/SSIM of meanRAW500 over meanRAWAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_meanRAWAll, SSIM_meansRGB500_meanRAWAll);
+fprintf('The PSNR/SSIM of meansRGB500 over meanRAWAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_meanRAWAll, SSIM_meansRGB500_meanRAWAll);
 % % meansRGB500 vs RAWGTAll
 % PSNR_meansRGB500_RAWGTAll = csnr( meansRGB500, RAWGTAll, 0, 0 );
 % SSIM_meansRGB500_RAWGTAll = cal_ssim( meansRGB500, RAWGTAll, 0, 0 );
-% fprintf('The PSNR/SSIM of meanRAW500 over RAWGTAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_RAWGTAll, SSIM_meansRGB500_RAWGTAll);
+% fprintf('The PSNR/SSIM of meansRGB500 over RAWGTAll are %2.4f/%2.4f. \n', PSNR_meansRGB500_RAWGTAll, SSIM_meansRGB500_RAWGTAll);
 
 % meanRAW500 vs meansRGBAll
 PSNR_meanRAW500_meansRGBAll = csnr( meanRAW500,meansRGBAll, 0, 0 );
