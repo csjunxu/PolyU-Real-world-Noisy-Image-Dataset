@@ -9,9 +9,12 @@ meanDF500 = zeros(size(rawDF));
 for i = 1:im_num
     %% read the tiff image
     rawDF = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
+    if size(rawDF,1) ~= size(meanDFAll,1)
+        rawDF = rot90(rawDF,3);
+    end
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
-%     fprintf('Processing %s. \n', rawname);
+    %     fprintf('Processing %s. \n', rawname);
     meanDFAll = meanDFAll + rawDF;
     if i == min(500,im_num)
         meanDF500 = uint8(meanDFAll./min(500,im_num));
