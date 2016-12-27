@@ -1,6 +1,5 @@
 %% mean of dark frames
 Original_image_dir = '20161226DF_ISO3200_5000/';
-
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -43,7 +42,7 @@ clear rawDF meanDFAll;
 %     fprintf('Processing %s. \n', rawname);
 %     meanDFAll = meanDFAll + rawDF;
 %     if i <= min(500,im_num)
-%         meanDF500 = meanDF500 + rawDF;
+%         meanDF500 = meanDFAll;
 %     end
 %     if i == min(500,im_num)
 %         meanDF500 = uint8(meanDF500./min(500,im_num));
