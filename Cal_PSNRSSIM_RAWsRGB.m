@@ -33,15 +33,13 @@ for i = 1:im_num
     SSIM_meanRAWAll = [SSIM_meanRAWAll cal_ssim( IMin, meanRAWAll, 0, 0 )];
     PSNR_RAWGTAll = [PSNR_RAWGTAll csnr( IMin,RAWGTAll, 0, 0 )];
     SSIM_RAWGTAll = [SSIM_RAWGTAll cal_ssim( IMin, RAWGTAll, 0, 0 )];
-    if i <= min(500,im_num)
+    if i == min(500,im_num)
         PSNR_meansRGB500 = PSNR_meansRGBAll;
         SSIM_meansRGB500 = SSIM_meansRGBAll;
         PSNR_meanRAW500 = PSNR_meanRAWAll;
         SSIM_meanRAW500 = SSIM_meanRAWAll;
         PSNR_RAWGT500 = PSNR_RAWGTAll;
         SSIM_RAWGT500 = SSIM_RAWGTAll;
-    end
-    if i == min(500,im_num)
         mPSNR_meansRGB500 = mean(PSNR_meansRGB500);
         mSSIM_meansRGB500 = mean(SSIM_meansRGB500);
         mPSNR_meanRAW500 = mean(PSNR_meanRAW500);
