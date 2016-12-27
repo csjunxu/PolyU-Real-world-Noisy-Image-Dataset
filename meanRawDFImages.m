@@ -11,7 +11,7 @@ for i = 1:im_num
     rawDF = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
-    fprintf('Processing %s. \n', rawname);
+%     fprintf('Processing %s. \n', rawname);
     meanDFAll = meanDFAll + rawDF;
     if i == min(500,im_num)
         meanDF500 = uint8(meanDFAll./min(500,im_num));
