@@ -17,7 +17,7 @@ for i = 1:im_num
     %     fprintf('Processing %s. \n', rawname);
     meanDFAll = meanDFAll + rawDF;
     if i == min(500,im_num)
-        meanDF500 = uint8(meanDFAll./min(500,im_num));
+        meanDF500 = uint16(meanDFAll./min(500,im_num));
         %         imshow(meansRGB500);
         imwrite(meanDF500,'20161226mean_ISO3200_5000/meanDF500_ARW2TIF.tiff');
         clear meanDF500;
