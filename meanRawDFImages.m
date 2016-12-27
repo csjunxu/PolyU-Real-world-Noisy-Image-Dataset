@@ -15,7 +15,7 @@ for i = 1:im_num
     fprintf('Processing %s. \n', rawname);
     meanDFAll = meanDFAll + rawDF;
     if i <= min(500,im_num)
-        meanDF500 = meanDF500 + rawDF;
+        meanDF500 = meanDFAll;
     end
     if i == min(500,im_num)
         meanDF500 = uint8(meanDF500./min(500,im_num));
