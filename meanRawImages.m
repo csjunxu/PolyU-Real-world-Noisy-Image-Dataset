@@ -1,6 +1,6 @@
 clear;
 %% mean of raw images
-Original_image_dir = '20161226_ISO3200_5000/';
+Original_image_dir = '20161228/';
 fpath = fullfile(Original_image_dir, '*.tiff');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -17,11 +17,11 @@ for i = 1:im_num
     if i == min(500,im_num)
         meanRaw500 = uint16(meanRawAll./min(500,im_num));
 %         imshow(meanRaw500);
-        imwrite(meanRaw500,'20161226mean_ISO3200_5000/meanRaw500_ARW2TIF.tiff');
+        imwrite(meanRaw500,'20161228mean/meanRaw500_ARW2TIF.tiff');
         clear meanRaw500;
     end
 end
 meanRawAll = uint16(meanRawAll./im_num);
 % imshow(meansRGBAll);
-imwrite(meanRawAll,'20161226mean_ISO3200_5000/meanRawAll_ARW2TIF.tiff');
+imwrite(meanRawAll,'20161228mean/meanRawAll_ARW2TIF.tiff');
 clear Raw meanRawAll;
