@@ -4,26 +4,32 @@ fpath = fullfile(Original_image_dir, '*.ARW');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
 D = regexp(Original_image_dir, '/', 'split');
+
 %% calculate mean Raw images
-Raw = double(imread(fullfile(Original_image_dir, im_dir(1).name)));
+S = regexp(im_dir(1).name, '\.', 'split');
+rawname = S{1};
+system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
+Raw = double(imread([Original_image_dir rawname '.tiff']));
 meanRawAll = zeros(size(Raw));
 meanRaw500 = zeros(size(Raw));
 
-%%
-set(0,'Format','long')
-str2double(cmdout(157:164))
+%% get the precision information
+get(0,'format');
+% set the precision to long instead of short
+set(0,'Format','long');
 
 for i = 1:im_num
     %% 0 read the tiff image
-    raw = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
+    system(['dcraw -v -T C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
+    Raw = double(imread([Original_image_dir rawname '.tiff']));
     %     fprintf('Processing %s. \n', rawname);
     meanRawAll = meanRawAll + Raw;
     if i == min(500,im_num)
         meanRaw500 = uint16(meanRawAll./min(500,im_num));
-%         imshow(meanRaw500);
-        imwrite(meanRaw500,[D{1} 'mean/meanRaw500_ARW2TIF.tiff');
+        %         imshow(meanRaw500);
+        imwrite(meanRaw500,[D{1} 'mean/meanRaw500_ARW2TIF.tiff']);
         clear meanRaw500;
     end
     
@@ -32,21 +38,21 @@ for i = 1:im_num
     
     %% 1 Linearization
     black = str2double(cmdout(119:121));
-    saturation = str2double(cmdout(135:138)); 
+    saturation = str2double(cmdout(135:138));
     lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % no value larger than 1 or less than 0;
-%     imshow(lin_bayer);
+    %     imshow(lin_bayer);
     
     %% 2 White Balancing
     wb_multipliers = [str2double(cmdout(157:164)), 1, str2double(cmdout(175:182))]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
-%     imshow(balanced_bayer);
+    %     imshow(balanced_bayer);
     
     %% 3 Demosaicking
     temp = uint16(balanced_bayer/max(balanced_bayer(:)) * (2^16-1));
     lin_rgb = double(demosaic(temp,'rggb'))/(2^16-1);
-%     imshow(lin_rgb);
+    %     imshow(lin_rgb);
     
     %% 4 Color Space Conversion
     sRGB2XYZ = [0.4124564 0.3575761 0.1804375;0.2126729 0.7151522 0.0721750;0.0193339 0.1191920 0.9503041];
@@ -58,17 +64,17 @@ for i = 1:im_num
     Cam2sRGB = (sRGB2Cam)^-1;
     lin_srgb = apply_cmatrix(lin_rgb, Cam2sRGB);
     lin_srgb = max(0,min(lin_srgb,1)); % Always keep image clipped b/w 0-1
-%     imshow(lin_srgb);
+    %     imshow(lin_srgb);
     
     %% 5 Brightness and Gamma Correction
     grayim = rgb2gray(lin_srgb); % Consider only gray channel
     grayscale = 0.25/mean(grayim(:));
     bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
     nl_srgb = bright_srgb.^(1/2.2);
-%     imshow(nl_srgb);
+    %     imshow(nl_srgb);
     imwrite(nl_srgb,[Original_image_dir rawname '_TIF2PNG.png']);
 end
 meanRawAll = uint16(meanRawAll./im_num);
 % imshow(meanRawAll);
-imwrite(meanRawAll,'20161228mean/meanRawAll_ARW2TIF.tiff');
+imwrite(meanRawAll, [D{1} 'mean/meanRawAll_ARW2TIF.tiff']);
 clear Raw meanRawAll cmdout;
