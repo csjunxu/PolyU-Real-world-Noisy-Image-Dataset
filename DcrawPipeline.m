@@ -27,7 +27,7 @@ for i = 1:im_num
     rawname = S{1};
     [~, ~] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
     Raw = double(imread([Original_image_dir rawname '.tiff']));
-    %     fprintf('Processing %s. \n', rawname);
+    fprintf('Processing %s. \n', rawname);
     meanRawAll = meanRawAll + Raw;
     if i == min(500,im_num)
         meanRaw500 = uint16(meanRawAll./min(500,im_num));
@@ -87,7 +87,7 @@ for i = 1:im_num
     end
     system(['del ' D{1} '\' rawname '.tiff']);
     system(['del ' D{1} '\' rawname '.ppm']);
-%    system(['del ' D{1} '\' rawname '.png']);
+    %    system(['del ' D{1} '\' rawname '.png']);
 end
 meanRawAll = uint16(meanRawAll./im_num);
 % imshow(meanRawAll);
