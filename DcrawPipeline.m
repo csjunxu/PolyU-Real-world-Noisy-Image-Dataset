@@ -21,7 +21,7 @@ get(0,'format');
 % set the precision to long instead of short
 set(0,'Format','long');
 
-for i = 1:2%im_num
+for i = 1:im_num
     %% 0 read the tiff image
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
@@ -85,6 +85,8 @@ for i = 1:2%im_num
         imwrite(meansRGB500, [D{1} 'mean/meansRGB500_ARW2TIF_TIF2PNG.png']);
         clear meansRGB500;
     end
+    system('del *.tiff');
+%     system('del *.png');
 end
 meanRawAll = uint16(meanRawAll./im_num);
 % imshow(meanRawAll);
