@@ -85,8 +85,9 @@ for i = 1:im_num
         imwrite(meansRGB500, [D{1} 'mean/meansRGB500_ARW2TIF_TIF2PNG.png']);
         clear meansRGB500;
     end
-    system('del *.tiff');
-%     system('del *.png');
+    system(['del ' D{1} '/' rawname '.tiff']);
+    system(['del ' D{1} '/' rawname '.ppm']);
+%    system(['del ' D{1} '/' rawname '.png']);
 end
 meanRawAll = uint16(meanRawAll./im_num);
 % imshow(meanRawAll);
