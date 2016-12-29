@@ -8,28 +8,31 @@ D = regexp(Original_image_dir, '/', 'split');
 %% calculate mean Raw images
 S = regexp(im_dir(1).name, '\.', 'split');
 rawname = S{1};
-[status, cmdout] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
+[status, ~] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
 Raw = double(imread([Original_image_dir rawname '.tiff']));
 meanRawAll = zeros(size(Raw));
 meanRaw500 = zeros(size(Raw));
+%% calculate mean sRGB images
+meansRGBAll = zeros([size(Raw),3]);
+meansRGB500 = zeros([size(Raw),3]);
 
 %% get the precision information
 get(0,'format');
 % set the precision to long instead of short
 set(0,'Format','long');
 
-for i = 1:im_num
+for i = 1:2%im_num
     %% 0 read the tiff image
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
-    [status, cmdout] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
+    [~, ~] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
     Raw = double(imread([Original_image_dir rawname '.tiff']));
     %     fprintf('Processing %s. \n', rawname);
     meanRawAll = meanRawAll + Raw;
     if i == min(500,im_num)
         meanRaw500 = uint16(meanRawAll./min(500,im_num));
         %         imshow(meanRaw500);
-        imwrite(meanRaw500,[D{1} 'mean/meanRaw500_ARW2TIF.tiff']);
+        imwrite(meanRaw500, [D{1} 'mean/meanRaw500_ARW2TIF.tiff']);
         clear meanRaw500;
     end
     
@@ -39,7 +42,7 @@ for i = 1:im_num
     %% 1 Linearization
     black = str2double(cmdout(119:121));
     saturation = str2double(cmdout(135:138));
-    lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
+    lin_bayer = (Raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % no value larger than 1 or less than 0;
     %     imshow(lin_bayer);
     
@@ -73,8 +76,23 @@ for i = 1:im_num
     nl_srgb = bright_srgb.^(1/2.2);
     %     imshow(nl_srgb);
     imwrite(nl_srgb,[Original_image_dir rawname '_TIF2PNG.png']);
+    
+    %% calculate mean sRGB images
+        meansRGBAll = meansRGBAll + nl_srgb;
+    if i == min(500,im_num)
+        meansRGB500 = uint8(meansRGBAll./min(500,im_num));
+        %         imshow(meansRGB500);
+        imwrite(meansRGB500, [D{1} 'mean/meansRGB500_ARW2TIF_TIF2PNG.png']);
+        clear meansRGB500;
+    end
 end
 meanRawAll = uint16(meanRawAll./im_num);
 % imshow(meanRawAll);
 imwrite(meanRawAll, [D{1} 'mean/meanRawAll_ARW2TIF.tiff']);
 clear Raw meanRawAll cmdout;
+meansRGBAll = uint8(meansRGBAll./im_num);
+% imshow(meansRGBAll);
+imwrite(meansRGBAll, [D{1} 'mean/meansRGBAll_ARW2TIF_TIF2PNG.png']);
+clear sRGB meansRGBAll;
+
+
