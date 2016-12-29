@@ -22,7 +22,7 @@ for i = 1:im_num
     %% 0 read the tiff image
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
-    system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
+    [status, cmdout] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
     Raw = double(imread([Original_image_dir rawname '.tiff']));
     %     fprintf('Processing %s. \n', rawname);
     meanRawAll = meanRawAll + Raw;
