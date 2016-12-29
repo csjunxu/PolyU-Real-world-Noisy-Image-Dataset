@@ -29,7 +29,7 @@ for i = 1:im_num
     if i == min(500,im_num)
         meanDF500 = uint16(meanDFAll./min(500,im_num));
         %         imshow(meansRGB500);
-        imwrite(meanDF500, [D{1} 'mean/meanDF500_ARW2TIF.tiff']);
+        imwrite(meanDF500, [D{1}(1:8) 'mean/meanDF500_ARW2TIF.tiff']);
         clear meanDF500;
     end
     system(['del ' D{1} '\' rawname '.tiff']);
@@ -38,7 +38,7 @@ for i = 1:im_num
 end
 meanDFAll = uint16(meanDFAll./im_num);
 % imshow(meanDFAll);
-imwrite(meanDFAll, [D{1} 'mean/meanDFAll_ARW2TIF.tiff']);
+imwrite(meanDFAll, [D{1}(1:8) 'mean/meanDFAll_ARW2TIF.tiff']);
 clear rawDF meanDFAll;
 
 % fpath = fullfile(Original_image_dir, '*.pgm');
