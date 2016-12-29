@@ -33,7 +33,7 @@ for i = 1:im_num
         clear meanDF500;
     end
     system(['del ' D{1} '\' rawname '.tiff']);
-%     system(['del ' D{1} '\' rawname '.ppm']);
+    %    system(['del ' D{1} '\' rawname '.ppm']);
     %    system(['del ' D{1} '\' rawname '.png']);
 end
 meanDFAll = uint16(meanDFAll./im_num);
