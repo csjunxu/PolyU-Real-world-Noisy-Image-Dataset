@@ -8,9 +8,9 @@ D = regexp(Original_image_dir, '/', 'split');
 S = regexp(im_dir(1).name, '\.', 'split');
 rawname = S{1};
 [status, ~] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
-rawDF = double(imread([Original_image_dir rawname '.tiff']));
-meanDFAll = zeros(size(rawDF));
-meanDF500 = zeros(size(rawDF));
+RawDF = double(imread([Original_image_dir rawname '.tiff']));
+meanDFAll = zeros(size(RawDF));
+meanDF500 = zeros(size(RawDF));
 %% get the precision information
 get(0,'format');
 % set the precision to long instead of short
@@ -20,25 +20,25 @@ for i = 1:im_num
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
     [~, ~] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
-
-    rawDF = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
-    if size(rawDF,1) ~= size(meanDFAll,1)
-        rawDF = rot90(rawDF,3); % counter-clockwise
+    RawDF = double(imread([Original_image_dir rawname '.tiff']));
+    if size(RawDF,1) ~= size(meanDFAll,1)
+        RawDF = rot90(RawDF,3); % counter-clockwise
     end
-    S = regexp(im_dir(i).name, '\.', 'split');
-    rawname = S{1};
-    %     fprintf('Processing %s. \n', rawname);
-    meanDFAll = meanDFAll + rawDF;
+    fprintf('Processing %s. \n', rawname);
+    meanDFAll = meanDFAll + RawDF;
     if i == min(500,im_num)
         meanDF500 = uint16(meanDFAll./min(500,im_num));
         %         imshow(meansRGB500);
-        imwrite(meanDF500,'20161226mean_ISO3200_5000/meanDF500_ARW2TIF.tiff');
+        imwrite(meanDF500, [D{1} 'mean/meanDF500_ARW2TIF.tiff']);
         clear meanDF500;
     end
+    system(['del ' D{1} '\' rawname '.tiff']);
+%     system(['del ' D{1} '\' rawname '.ppm']);
+    %    system(['del ' D{1} '\' rawname '.png']);
 end
 meanDFAll = uint16(meanDFAll./im_num);
 % imshow(meanDFAll);
-imwrite(meanDFAll,['20161226mean_ISO3200_5000/meanDFAll_ARW2TIF.tiff']);
+imwrite(meanDFAll, [D{1} 'mean/meanDFAll_ARW2TIF.tiff']);
 clear rawDF meanDFAll;
 
 % fpath = fullfile(Original_image_dir, '*.pgm');
