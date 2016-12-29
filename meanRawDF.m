@@ -1,13 +1,26 @@
-%% mean of dark frames
-Original_image_dir = '20161226DF_ISO3200_5000/';
-fpath = fullfile(Original_image_dir, '*.tiff');
+%% directory of dark frames
+Original_image_dir = '20161228DF/';
+fpath = fullfile(Original_image_dir, '*.ARW');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
-rawDF = double(imread(fullfile(Original_image_dir, im_dir(1).name)));
+D = regexp(Original_image_dir, '/', 'split');
+%% calculate mean RawDF images
+S = regexp(im_dir(1).name, '\.', 'split');
+rawname = S{1};
+[status, ~] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
+rawDF = double(imread([Original_image_dir rawname '.tiff']));
 meanDFAll = zeros(size(rawDF));
 meanDF500 = zeros(size(rawDF));
+%% get the precision information
+get(0,'format');
+% set the precision to long instead of short
+set(0,'Format','long');
 for i = 1:im_num
-    %% read the tiff image
+    %% 0 read the tiff image
+    S = regexp(im_dir(i).name, '\.', 'split');
+    rawname = S{1};
+    [~, ~] = system(['dcraw -4 -T -D -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
+
     rawDF = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     if size(rawDF,1) ~= size(meanDFAll,1)
         rawDF = rot90(rawDF,3); % counter-clockwise
