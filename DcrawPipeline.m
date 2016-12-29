@@ -1,29 +1,44 @@
 clear;
-Original_image_dir = '20161226_ISO3200_5000/';
-fpath = fullfile(Original_image_dir, '*.tiff');
+Original_image_dir = '20161228/';
+fpath = fullfile(Original_image_dir, '*.ARW');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
+D = regexp(Original_image_dir, '/', 'split');
+%% calculate mean Raw images
+Raw = double(imread(fullfile(Original_image_dir, im_dir(1).name)));
+meanRawAll = zeros(size(Raw));
+meanRaw500 = zeros(size(Raw));
+
+%%
+set(0,'Format','long')
+str2double(cmdout(157:164))
+
 for i = 1:im_num
     %% 0 read the tiff image
     raw = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
-    fprintf('%s : \n',rawname);
+    %     fprintf('Processing %s. \n', rawname);
+    meanRawAll = meanRawAll + Raw;
+    if i == min(500,im_num)
+        meanRaw500 = uint16(meanRawAll./min(500,im_num));
+%         imshow(meanRaw500);
+        imwrite(meanRaw500,[D{1} 'mean/meanRaw500_ARW2TIF.tiff');
+        clear meanRaw500;
+    end
+    
+    %% get parameters of black/saturation and wb_multipliers
+    [status,cmdout] = system(['dcraw -w -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' S{1} '.ARW']);
     
     %% 1 Linearization
-    black = 128;
-    saturation = 4095;
+    black = str2double(cmdout(119:121));
+    saturation = str2double(cmdout(135:138)); 
     lin_bayer = (raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0,min(lin_bayer,1)); % no value larger than 1 or less than 0;
 %     imshow(lin_bayer);
     
     %% 2 White Balancing
-    % iso=1600: [2.503906, 1, 1.914063] night
-    % iso=3200: [1.605469, 1, 2.144531] daytime
-    % iso=6400: [2.758397, 1, 1.238742] night
-    % iso=25600: [2.113281, 1, 1.859375] night
-    % iso=3200: [1.804688, 1, 1.828125] daytime 20161226
-    wb_multipliers = [1.804688, 1, 1.828125]; % for particular condition, from dcraw;
+    wb_multipliers = [str2double(cmdout(157:164)), 1, str2double(cmdout(175:182))]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
 %     imshow(balanced_bayer);
@@ -53,4 +68,7 @@ for i = 1:im_num
 %     imshow(nl_srgb);
     imwrite(nl_srgb,[Original_image_dir rawname '_TIF2PNG.png']);
 end
-
+meanRawAll = uint16(meanRawAll./im_num);
+% imshow(meanRawAll);
+imwrite(meanRawAll,'20161228mean/meanRawAll_ARW2TIF.tiff');
+clear Raw meanRawAll cmdout;
