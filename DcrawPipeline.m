@@ -37,13 +37,13 @@ for i = 1:2%im_num
     end
     
     %% get parameters of black/saturation and wb_multipliers
-    [status,cmdout] = system(['dcraw -w -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' S{1} '.ARW']);
+    [status,cmdout] = system(['dcraw -w -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
     
     %% 1 Linearization
     black = str2double(cmdout(119:121));
     saturation = str2double(cmdout(135:138));
     lin_bayer = (Raw-black)/(saturation-black); %  normailization to [0,1];
-    lin_bayer = max(0,min(lin_bayer,1)); % no value larger than 1 or less than 0;
+    lin_bayer = max(0, min(lin_bayer,1)); % no value larger than 1 or less than 0;
     %     imshow(lin_bayer);
     
     %% 2 White Balancing
@@ -78,7 +78,7 @@ for i = 1:2%im_num
     imwrite(nl_srgb,[Original_image_dir rawname '_TIF2PNG.png']);
     
     %% calculate mean sRGB images
-        meansRGBAll = meansRGBAll + nl_srgb;
+    meansRGBAll = meansRGBAll + nl_srgb;
     if i == min(500,im_num)
         meansRGB500 = uint8(meansRGBAll./min(500,im_num));
         %         imshow(meansRGB500);
