@@ -1,6 +1,6 @@
 clear;
 %% mean of raw images
-Original_image_dir = '20161226mean_ISO3200_5000/';
+Original_image_dir = '20161228mean/';
 fpath = fullfile(Original_image_dir, '*.png');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -52,7 +52,7 @@ PSNR_RAWGT500_RAWGTAll = csnr( RAWGT500,RAWGTAll, 0, 0 );
 SSIM_RAWGT500_RAWGTAll = cal_ssim( RAWGT500, RAWGTAll, 0, 0 );
 fprintf('The PSNR/SSIM of RAWGT500 over RAWGTAll are %2.4f/%2.4f. \n', PSNR_RAWGT500_RAWGTAll, SSIM_RAWGT500_RAWGTAll);
 
-savename = 'PSNRSSIM_meansRGB_meanRAW_RAWGT_500vs5000_20161226mean_ISO3200.mat';
+savename = 'PSNRSSIM_meansRGB_meanRAW_RAWGT_500vs5000_20161228mean.mat';
 save(savename, 'PSNR_meansRGB500_meansRGBAll', 'SSIM_meansRGB500_meansRGBAll', ...
     'PSNR_meansRGB500_meanRAWAll', 'SSIM_meansRGB500_meanRAWAll',...
     'PSNR_meansRGB500_RAWGTAll', 'SSIM_meansRGB500_RAWGTAll', ...
