@@ -40,14 +40,14 @@ for i = 1:im_num
     [status,cmdout] = system(['dcraw -w -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
     
     %% 1 Linearization
-    black = str2double(cmdout(119:121));
-    saturation = str2double(cmdout(135:138));
+    black = str2double(cmdout(128:130));
+    saturation = str2double(cmdout(144:147));
     lin_bayer = (Raw-black)/(saturation-black); %  normailization to [0,1];
     lin_bayer = max(0, min(lin_bayer,1)); % no value larger than 1 or less than 0;
     %     imshow(lin_bayer);
     
     %% 2 White Balancing
-    wb_multipliers = [str2double(cmdout(157:164)), 1, str2double(cmdout(175:182))]; % for particular condition, from dcraw;
+    wb_multipliers = [str2double(cmdout(166:173)), 1, str2double(cmdout(184:191))]; % for particular condition, from dcraw;
     mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
     balanced_bayer = lin_bayer .* mask;
     %     imshow(balanced_bayer);
@@ -85,9 +85,9 @@ for i = 1:im_num
         imwrite(meansRGB500, [D{1} 'mean/meansRGB500_ARW2TIF_TIF2PNG.png']);
         clear meansRGB500;
     end
-    system(['del ' D{1} '/' rawname '.tiff']);
-    system(['del ' D{1} '/' rawname '.ppm']);
-%    system(['del ' D{1} '/' rawname '.png']);
+    system(['del ' D{1} '\' rawname '.tiff']);
+    system(['del ' D{1} '\' rawname '.ppm']);
+%    system(['del ' D{1} '\' rawname '.png']);
 end
 meanRawAll = uint16(meanRawAll./im_num);
 % imshow(meanRawAll);
