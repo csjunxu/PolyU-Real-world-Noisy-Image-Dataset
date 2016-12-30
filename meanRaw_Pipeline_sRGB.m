@@ -1,5 +1,5 @@
 clear;
-Original_image_dir = '20161228/';
+Original_image_dir = '20161230/';
 fpath = fullfile(Original_image_dir, '*.ARW');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
