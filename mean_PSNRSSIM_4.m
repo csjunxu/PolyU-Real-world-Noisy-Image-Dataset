@@ -104,18 +104,18 @@ for i = 1:im_num
     SSIM_meanRAW500 = [SSIM_meanRAW500 cal_ssim( IMin, meanRAW500, 0, 0 )];
     PSNR_RAWGT500 = [PSNR_RAWGT500 csnr( IMin,RAWGT500, 0, 0 )];
     SSIM_RAWGT500 = [SSIM_RAWGT500 cal_ssim( IMin, RAWGT500, 0, 0 )];
-    fprintf('The PSNR/SSIM of  meansRGB are %2.4f/%2.4f. \n', PSNR_meansRGB500(end), SSIM_meansRGB500(end));
-    fprintf('The PSNR/SSIM of meanRAW are %2.4f/%2.4f. \n', PSNR_meanRAW500(end), SSIM_meanRAW500(end));
-    fprintf('The PSNR/SSIM of RAWGT are %2.4f/%2.4f. \n', PSNR_RAWGT500(end), SSIM_RAWGT500(end));
+    fprintf('The PSNR/SSIM over  meansRGB500 are %2.4f/%2.4f. \n', PSNR_meansRGB500(end), SSIM_meansRGB500(end));
+    fprintf('The PSNR/SSIM over meanRAW500 are %2.4f/%2.4f. \n', PSNR_meanRAW500(end), SSIM_meanRAW500(end));
+    fprintf('The PSNR/SSIM over RAWGT500 are %2.4f/%2.4f. \n', PSNR_RAWGT500(end), SSIM_RAWGT500(end));
     PSNR_meansRGBAll = [PSNR_meansRGBAll csnr( IMin,meansRGBAll, 0, 0 )];
     SSIM_meansRGBAll = [SSIM_meansRGBAll cal_ssim( IMin, meansRGBAll, 0, 0 )];
     PSNR_meanRAWAll = [PSNR_meanRAWAll csnr( IMin,meanRAWAll, 0, 0 )];
     SSIM_meanRAWAll = [SSIM_meanRAWAll cal_ssim( IMin, meanRAWAll, 0, 0 )];
     PSNR_RAWGTAll = [PSNR_RAWGTAll csnr( IMin,RAWGTAll, 0, 0 )];
     SSIM_RAWGTAll = [SSIM_RAWGTAll cal_ssim( IMin, RAWGTAll, 0, 0 )];
-    fprintf('The PSNR/SSIM of  meansRGB are %2.4f/%2.4f. \n', PSNR_meansRGBAll(end), SSIM_meansRGBAll(end));
-    fprintf('The PSNR/SSIM of meanRAW are %2.4f/%2.4f. \n', PSNR_meanRAWAll(end), SSIM_meanRAWAll(end));
-    fprintf('The PSNR/SSIM of RAWGT are %2.4f/%2.4f. \n', PSNR_RAWGTAll(end), SSIM_RAWGTAll(end));
+    fprintf('The PSNR/SSIM over  meansRGBAll are %2.4f/%2.4f. \n', PSNR_meansRGBAll(end), SSIM_meansRGBAll(end));
+    fprintf('The PSNR/SSIM over meanRAWAll are %2.4f/%2.4f. \n', PSNR_meanRAWAll(end), SSIM_meanRAWAll(end));
+    fprintf('The PSNR/SSIM over RAWGTAll are %2.4f/%2.4f. \n', PSNR_RAWGTAll(end), SSIM_RAWGTAll(end));
 end
 mPSNR_meansRGB500 = mean(PSNR_meansRGB500);
 mSSIM_meansRGB500 = mean(SSIM_meansRGB500);
