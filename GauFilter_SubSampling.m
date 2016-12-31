@@ -16,7 +16,7 @@ RAWGT500 = imread([Original_image_dir 'RawGT500_ARW2TIF_TIF2PNG.png']);
 RAWGTAll = imread([Original_image_dir 'RawGTAll_ARW2TIF_TIF2PNG.png']);
 
 for scale = [0.5 0.25]
-    gf = fspecial('gaussian', [11 11], 9);
+    gf = fspecial('gaussian', [11 11], 16);
     meansRGB500 = imresize(imfilter(meansRGB500, gf, 'same'), scale);
     meansRGBAll = imresize(imfilter(meansRGBAll, gf, 'same'), scale);
     meanRAW500 = imresize(imfilter(meanRAW500, gf, 'same'), scale);
