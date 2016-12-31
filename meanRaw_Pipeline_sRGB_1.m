@@ -78,7 +78,7 @@ for i = 1:im_num
     imwrite(nl_srgb,[Original_image_dir rawname '_TIF2PNG.png']);
     
     %% calculate mean sRGB images
-    meansRGBAll = meansRGBAll + nl_srgb;
+    meansRGBAll = meansRGBAll + nl_srgb*255;
     if i == min(500,im_num)
         meansRGB500 = uint8(meansRGBAll./min(500,im_num));
         %         imshow(meansRGB500);
