@@ -4,10 +4,11 @@ Original_image_dir = '20161228/';
 fpath = fullfile(Original_image_dir, '*.png');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
+D = regexp(Original_image_dir, '/', 'split');
 sRGB = double(imread(fullfile(Original_image_dir, im_dir(1).name)));
 meansRGBAll = zeros(size(sRGB));
 meansRGB500 = zeros(size(sRGB));
-for i = 1:im_num
+for i = 501:im_num
     %% read the tiff image
     sRGB = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     S = regexp(im_dir(i).name, '\.', 'split');
