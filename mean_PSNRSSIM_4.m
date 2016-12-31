@@ -67,57 +67,59 @@ save(savename, 'PSNR_meansRGB500_meansRGBAll', 'SSIM_meansRGB500_meansRGBAll', .
     'PSNR_RAWGT500_RAWGTAll', 'SSIM_RAWGT500_RAWGTAll');
 
 %% RAWsRGB
+meansRGB500 = imread([Original_image_dir 'meansRGB500_ARW2TIF_TIF2PNG.png']);
+meanRAW500 = imread([Original_image_dir 'meanRAW500_ARW2TIF_TIF2PNG.png']);
+RAWGT500 = imread([Original_image_dir 'RawGT500_ARW2TIF_TIF2PNG.png']);
 meansRGBAll = imread([Original_image_dir 'meansRGBAll_ARW2TIF_TIF2PNG.png']);
 meanRAWAll = imread([Original_image_dir 'meanRAWAll_ARW2TIF_TIF2PNG.png']);
 RAWGTAll = imread([Original_image_dir 'RawGTAll_ARW2TIF_TIF2PNG.png']);
-fprintf('The PSNR/SSIM of meansRGBAll/meanRAWAll are %2.4f/%2.4f. \n', csnr( meansRGBAll,meanRAWAll, 0, 0 ), cal_ssim( meansRGBAll, meanRAWAll, 0, 0 ));
-fprintf('The PSNR/SSIM of meansRGBAll/RAWGTAll are %2.4f/%2.4f. \n', csnr( meansRGBAll,RAWGTAll, 0, 0 ), cal_ssim( meansRGBAll, RAWGTAll, 0, 0 ));
-PSNR_meansRGBAll = [];
-SSIM_meansRGBAll = [];
-PSNR_meanRAWAll = [];
-SSIM_meanRAWAll = [];
-PSNR_RAWGTAll = [];
-SSIM_RAWGTAll = [];
 PSNR_meansRGB500 = [];
 SSIM_meansRGB500 = [];
 PSNR_meanRAW500 = [];
 SSIM_meanRAW500 = [];
 PSNR_RAWGT500 = [];
 SSIM_RAWGT500 = [];
+PSNR_meansRGBAll = [];
+SSIM_meansRGBAll = [];
+PSNR_meanRAWAll = [];
+SSIM_meanRAWAll = [];
+PSNR_RAWGTAll = [];
+SSIM_RAWGTAll = [];
 for i = 1:im_num
     %% read the tiff image
     IMin = imread(fullfile(Original_image_dir, im_dir(i).name));
     S = regexp(im_dir(i).name, '\.', 'split');
     rawname = S{1};
     fprintf('Processing %s. \n', rawname);
+    PSNR_meansRGB500 = [PSNR_meansRGB500 csnr( IMin,meansRGB500, 0, 0 )];
+    SSIM_meansRGB500 = [SSIM_meansRGB500 cal_ssim( IMin, meansRGB500, 0, 0 )];
+    PSNR_meanRAW500 = [PSNR_meanRAW500 csnr( IMin,meanRAW500, 0, 0 )];
+    SSIM_meanRAW500 = [SSIM_meanRAW500 cal_ssim( IMin, meanRAW500, 0, 0 )];
+    PSNR_RAWGT500 = [PSNR_RAWGT500 csnr( IMin,RAWGT500, 0, 0 )];
+    SSIM_RAWGT500 = [SSIM_RAWGT500 cal_ssim( IMin, RAWGT500, 0, 0 )];
+    fprintf('The PSNR/SSIM of  meansRGB are %2.4f/%2.4f. \n', PSNR_meansRGB500(end), SSIM_meansRGB500(end));
+    fprintf('The PSNR/SSIM of meanRAW are %2.4f/%2.4f. \n', PSNR_meanRAW500(end), SSIM_meanRAW500(end));
+    fprintf('The PSNR/SSIM of RAWGT are %2.4f/%2.4f. \n', PSNR_RAWGT500(end), SSIM_RAWGT500(end));
     PSNR_meansRGBAll = [PSNR_meansRGBAll csnr( IMin,meansRGBAll, 0, 0 )];
     SSIM_meansRGBAll = [SSIM_meansRGBAll cal_ssim( IMin, meansRGBAll, 0, 0 )];
     PSNR_meanRAWAll = [PSNR_meanRAWAll csnr( IMin,meanRAWAll, 0, 0 )];
     SSIM_meanRAWAll = [SSIM_meanRAWAll cal_ssim( IMin, meanRAWAll, 0, 0 )];
     PSNR_RAWGTAll = [PSNR_RAWGTAll csnr( IMin,RAWGTAll, 0, 0 )];
     SSIM_RAWGTAll = [SSIM_RAWGTAll cal_ssim( IMin, RAWGTAll, 0, 0 )];
-    if i == min(500,im_num)
-        PSNR_meansRGB500 = PSNR_meansRGBAll;
-        SSIM_meansRGB500 = SSIM_meansRGBAll;
-        PSNR_meanRAW500 = PSNR_meanRAWAll;
-        SSIM_meanRAW500 = SSIM_meanRAWAll;
-        PSNR_RAWGT500 = PSNR_RAWGTAll;
-        SSIM_RAWGT500 = SSIM_RAWGTAll;
-        mPSNR_meansRGB500 = mean(PSNR_meansRGB500);
-        mSSIM_meansRGB500 = mean(SSIM_meansRGB500);
-        mPSNR_meanRAW500 = mean(PSNR_meanRAW500);
-        mSSIM_meanRAW500 = mean(SSIM_meanRAW500);
-        mPSNR_RAWGT500 = mean(PSNR_RAWGT500);
-        mSSIM_RAWGT500 = mean(SSIM_RAWGT500);
-        savename = ['PSNRSSIM_meansRGB500_meanRAW500_RAWGT500_' D{1}(1:8) '.mat'];
-        save(savename, 'mPSNR_meansRGB500','mSSIM_meansRGB500','PSNR_meansRGB500','SSIM_meansRGB500', ...
-            'mPSNR_meanRAW500', 'mSSIM_meanRAW500', 'PSNR_meanRAW500', 'SSIM_meanRAW500',...
-            'mPSNR_RAWGT500', 'mSSIM_RAWGT500', 'PSNR_RAWGT500', 'SSIM_RAWGT500');
-    end
     fprintf('The PSNR/SSIM of  meansRGB are %2.4f/%2.4f. \n', PSNR_meansRGBAll(end), SSIM_meansRGBAll(end));
     fprintf('The PSNR/SSIM of meanRAW are %2.4f/%2.4f. \n', PSNR_meanRAWAll(end), SSIM_meanRAWAll(end));
     fprintf('The PSNR/SSIM of RAWGT are %2.4f/%2.4f. \n', PSNR_RAWGTAll(end), SSIM_RAWGTAll(end));
 end
+mPSNR_meansRGB500 = mean(PSNR_meansRGB500);
+mSSIM_meansRGB500 = mean(SSIM_meansRGB500);
+mPSNR_meanRAW500 = mean(PSNR_meanRAW500);
+mSSIM_meanRAW500 = mean(SSIM_meanRAW500);
+mPSNR_RAWGT500 = mean(PSNR_RAWGT500);
+mSSIM_RAWGT500 = mean(SSIM_RAWGT500);
+savename = ['PSNRSSIM_meansRGB500_meanRAW500_RAWGT500_' D{1}(1:8) '.mat'];
+save(savename, 'mPSNR_meansRGB500','mSSIM_meansRGB500','PSNR_meansRGB500','SSIM_meansRGB500', ...
+    'mPSNR_meanRAW500', 'mSSIM_meanRAW500', 'PSNR_meanRAW500', 'SSIM_meanRAW500',...
+    'mPSNR_RAWGT500', 'mSSIM_RAWGT500', 'PSNR_RAWGT500', 'SSIM_RAWGT500');
 mPSNR_meansRGBAll = mean(PSNR_meansRGBAll);
 mSSIM_meansRGBAll = mean(SSIM_meansRGBAll);
 mPSNR_meanRAWAll = mean(PSNR_meanRAWAll);
