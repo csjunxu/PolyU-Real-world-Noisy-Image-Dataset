@@ -1,6 +1,6 @@
 clear;
 %% mean of raw images
-Original_image_dir = '20161228/';
+Original_image_dir = '20161230/';
 fpath = fullfile(Original_image_dir, '*.png');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
