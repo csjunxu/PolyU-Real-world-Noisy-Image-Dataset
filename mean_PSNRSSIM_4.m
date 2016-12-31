@@ -66,13 +66,20 @@ save(savename, 'PSNR_meansRGB500_meansRGBAll', 'SSIM_meansRGB500_meansRGBAll', .
     'PSNR_RAWGT500_meanRAWAll', 'SSIM_RAWGT500_meanRAWAll',...
     'PSNR_RAWGT500_RAWGTAll', 'SSIM_RAWGT500_RAWGTAll');
 
+%% mean of raw images
+Original_meanimage_dir = '20161228mean/';
+Original_image_dir = '20161228/';
+fpath = fullfile(Original_image_dir, '*.png');
+im_dir  = dir(fpath);
+im_num = length(im_dir);
+D = regexp(Original_image_dir, '/', 'split');
 %% RAWsRGB
-meansRGB500 = imread([Original_image_dir 'meansRGB500_ARW2TIF_TIF2PNG.png']);
-meanRAW500 = imread([Original_image_dir 'meanRAW500_ARW2TIF_TIF2PNG.png']);
-RAWGT500 = imread([Original_image_dir 'RawGT500_ARW2TIF_TIF2PNG.png']);
-meansRGBAll = imread([Original_image_dir 'meansRGBAll_ARW2TIF_TIF2PNG.png']);
-meanRAWAll = imread([Original_image_dir 'meanRAWAll_ARW2TIF_TIF2PNG.png']);
-RAWGTAll = imread([Original_image_dir 'RawGTAll_ARW2TIF_TIF2PNG.png']);
+meansRGB500 = imread([Original_meanimage_dir 'meansRGB500_ARW2TIF_TIF2PNG.png']);
+meanRAW500 = imread([Original_meanimage_dir 'meanRAW500_ARW2TIF_TIF2PNG.png']);
+RAWGT500 = imread([Original_meanimage_dir 'RawGT500_ARW2TIF_TIF2PNG.png']);
+meansRGBAll = imread([Original_meanimage_dir 'meansRGBAll_ARW2TIF_TIF2PNG.png']);
+meanRAWAll = imread([Original_meanimage_dir 'meanRAWAll_ARW2TIF_TIF2PNG.png']);
+RAWGTAll = imread([Original_meanimage_dir 'RawGTAll_ARW2TIF_TIF2PNG.png']);
 PSNR_meansRGB500 = [];
 SSIM_meansRGB500 = [];
 PSNR_meanRAW500 = [];
