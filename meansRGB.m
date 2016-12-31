@@ -8,7 +8,7 @@ D = regexp(Original_image_dir, '/', 'split');
 sRGB = double(imread(fullfile(Original_image_dir, im_dir(1).name)));
 meansRGBAll = zeros(size(sRGB));
 meansRGB500 = zeros(size(sRGB));
-for i = 501:im_num
+for i = 1:im_num
     %% read the tiff image
     sRGB = double(imread(fullfile(Original_image_dir, im_dir(i).name)));
     S = regexp(im_dir(i).name, '\.', 'split');
