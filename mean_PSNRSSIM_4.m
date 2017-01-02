@@ -1,9 +1,6 @@
 clear;
 %% mean of raw images
 Original_image_dir = '20161230mean/';
-fpath = fullfile(Original_image_dir, '*.png');
-im_dir  = dir(fpath);
-im_num = length(im_dir);
 D = regexp(Original_image_dir, '/', 'split');
 
 %% 500vsAll
