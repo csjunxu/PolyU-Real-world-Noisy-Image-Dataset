@@ -64,8 +64,8 @@ save(savename, 'PSNR_meansRGB500_meansRGBAll', 'SSIM_meansRGB500_meansRGBAll', .
     'PSNR_RAWGT500_RAWGTAll', 'SSIM_RAWGT500_RAWGTAll');
 
 %% mean of raw images
-Original_meanimage_dir = '20161228mean/';
-Original_image_dir = '20161228/';
+Original_meanimage_dir = '20161230mean/';
+Original_image_dir = '20161230/';
 fpath = fullfile(Original_image_dir, '*.png');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
