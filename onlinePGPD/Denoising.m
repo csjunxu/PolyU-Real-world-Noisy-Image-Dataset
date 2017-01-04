@@ -32,7 +32,7 @@ for ite  =  1 : par.IteNum
     if ite==1
         par.nSig = par.nSig0;
     else
-        dif = mean( mean( (par.nim-im_out).^2 ) ) ;
+        dif = mean( mean( (par.mI-im_out).^2 ) ) ;
         par.nSig = sqrt( abs( par.nSig0^2 - dif ) );
     end
     % Sparse Coding
