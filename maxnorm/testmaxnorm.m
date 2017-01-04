@@ -9,3 +9,4 @@ tau = 0.1;
 mu = 0.1;
 tol = 1e-3;
 [L, R] = maxnormproximalpoint(Y,alpha,gamma,tau,mu,tol);
+Yhat = L * R';
