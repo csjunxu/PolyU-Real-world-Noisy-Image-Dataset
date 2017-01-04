@@ -1,0 +1,11 @@
+clear;
+Y=imread('kodak_fence.tif','tif');
+Y=double(Y);
+Y = Y(:,:,1);
+[n,m,ch]=size(Y);
+alpha = 0.1;
+gamma = 0.9;
+tau = 0.1;
+mu = 0.1;
+tol = 1e-3;
+[L, R] = maxnormproximalpoint(Y,alpha,gamma,tau,mu,tol);
