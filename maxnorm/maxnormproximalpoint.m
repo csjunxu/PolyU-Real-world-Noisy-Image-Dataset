@@ -1,5 +1,6 @@
 function [L, R] = maxnormproximalpoint(Y,alpha,gamma,tau,mu,tol)
-% alpha>0, 0<gamma<1, tol>0, tau>0
+% a proximal-point method for max-norm regularization problem
+% alpha>0, 0<gamma<1, tol>0, tau>0, mu>0
 [U, S, V] = svd(Y);
 
 % Initialization
