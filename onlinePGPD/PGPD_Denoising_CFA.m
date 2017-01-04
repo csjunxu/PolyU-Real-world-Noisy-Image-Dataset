@@ -12,7 +12,7 @@ par.Win = min(2*par.ps,16);
 
 for cls_num= [32]
     par.cls_num = cls_num; % number of clusters
-    for c1 = 0:0.1:1
+    for c1 = 0.1:0.1:1
         par.c1 = c1*2*sqrt(2);
         par.IteNum = 3*par.changeD;
         % record all the results in each iteration
