@@ -14,7 +14,7 @@ R = R0;
 Flag = true;
 while Flag
     %% 1 squash function
-    Df = -2 * [(Y - L * R') * R; (V' - R * L') * L];
+    Df = -2 * [(Y - L * R') * R; (Y' - R * L') * L];
     Akhat = squash(Ak - tau/2 * Df, tau * mu);
     if ( norm(Ak-Akhat)/norm(Ak) >= tol )
         Flag = false;
@@ -22,15 +22,21 @@ while Flag
     %% 2 Compute the smallest nonnegative intergel "ell" which satisfy:
     % Phi1 > Phi2 -  alpha * gamma^ell * norm(Ak - Akhat);
     ell = 0;
-    A1 = Ak + gamma^ell * (Akhat - Ak);
-    L1 = A1(1:size(U,1), 1:size(U,2));
-    R1 = A1(size(U,1) + 1:end, 1:size(U,2));
-    Phi1 = norm(Y - L1 * R1') + mu * max(sum(A1.^2, 2));
+    L1 = Akhat(1:size(U,1), 1:size(U,2));
+    R1 = Akhat(size(U,1) + 1:end, 1:size(U,2));
+    Phi1 = norm(Y - L1 * R1') + mu * max(sum(Akhat.^2, 2));
     L2 = Ak(1:size(U,1), 1:size(U,2));
     R2 = Ak(size(U,1) + 1:end, 1:size(U,2));
     Phi2 = norm(Y - L2 * R2') + mu * max(sum(Ak.^2, 2));
-    while Phi1 > Phi2 -  alpha * gamma^ell * norm(Ak - Akhat);
+    while Phi1 > Phi2 - alpha * gamma^ell * norm(Ak - Akhat);
         ell = ell + 1;
+        A1 = Ak + gamma^ell * (Akhat - Ak);
+        L1 = A1(1:size(U,1), 1:size(U,2));
+        R1 = A1(size(U,1) + 1:end, 1:size(U,2));
+        Phi1 = norm(Y - L1 * R1') + mu * max(sum(A1.^2, 2));
+        L2 = Ak(1:size(U,1), 1:size(U,2));
+        R2 = Ak(size(U,1) + 1:end, 1:size(U,2));
+        Phi2 = norm(Y - L2 * R2') + mu * max(sum(Ak.^2, 2));
     end
     %% 3 update the matrix Ak
     Ak = (1 - gamma^ell) * Ak + gamma^ell * Akhat;
