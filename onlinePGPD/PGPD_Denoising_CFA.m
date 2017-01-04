@@ -53,6 +53,7 @@ for cls_num= [32]
             PSNR =   csnr( par.mI*255, par.tI*255, 0, 0 );
             SSIM      =  cal_ssim( par.mI*255, par.tI*255, 0, 0 );
             fprintf('The initial value of PSNR = %2.4f, SSIM = %2.4f \n', PSNR,SSIM);
+            %%%%%%%%%%2. denoising%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             [im_out,par]  =  Denoising(par);
             im_out(im_out>1)=1;
             im_out(im_out<0)=0;
@@ -62,6 +63,14 @@ for cls_num= [32]
             imname = sprintf('nSig%d_clsnum%d_c%2.2f_%s',nSig,cls_num,c1,im_dir(i).name);
             imwrite(im_out,imname);
             fprintf('%s : PSNR = %2.4f, SSIM = %2.4f \n',im_dir(i).name, par.PSNR(par.IteNum,par.image),par.SSIM(par.IteNum,par.image)     );
+            %%%%%%%%%%%%3. color demosaicking
+            %We use the following method for color demosaicking
+            %L. Zhang and X. Wu, Color demosaicking via directional linear minimum mean square-error estimation,?
+            %IEEE Trans. on Image Processing, vol. 14, pp. 2167-2178, Dec. 2005.
+            dmI=dmsc(im_out);
+            PSNR=csnr(dmI*255,par.I*255,20,20);
+            SSIM=cal_ssim( dmI*255, par.I*255, 0, 0 );
+            fprintf('%s : PSNR = %2.4f, SSIM = %2.4f \n',im_dir(i).name, PSNR, SSIM);
         end
         mPSNR=mean(par.PSNR,2);
         [~, idx] = max(mPSNR);
