@@ -12,7 +12,7 @@ par.Win = min(2*par.ps,16);
 
 for cls_num= [32]
     par.cls_num = cls_num; % number of clusters
-    for c1 = 0.14
+    for c1 = 0:0.1:1
         par.c1 = c1*2*sqrt(2);
         par.IteNum = 3*par.changeD;
         % record all the results in each iteration
@@ -59,7 +59,7 @@ for cls_num= [32]
             % calculate the PSNR
             par.PSNR(par.IteNum,par.image)  =   csnr( im_out*255, par.tI*255, 0, 0 );
             par.SSIM(par.IteNum,par.image)      =  cal_ssim( im_out*255, par.tI*255, 0, 0 );
-            imname = sprintf('/nSig%d_clsnum%d_nlsp%d+%d_step%d_Win%d_itenum%d_c%2.2f_delta%2.2f_eta%2.2f_%s',nSig,cls_num,nlsp,par.increase,par.step,par.Win,par.IteNum,c1,delta,par.eta,im_dir(i).name);
+            imname = sprintf('nSig%d_clsnum%d_c%2.2f_%s',nSig,cls_num,c1,im_dir(i).name);
             imwrite(im_out,imname);
             fprintf('%s : PSNR = %2.4f, SSIM = %2.4f \n',im_dir(i).name, par.PSNR(par.IteNum,par.image),par.SSIM(par.IteNum,par.image)     );
         end

@@ -33,7 +33,7 @@ for ite  =  1 : par.IteNum
         par.nSig = par.nSig0;
     else
         dif = mean( mean( (par.nim-im_out).^2 ) ) ;
-        par.nSig = sqrt( abs( par.nSig0^2 - dif ) )*par.eta;
+        par.nSig = sqrt( abs( par.nSig0^2 - dif ) );
     end
     % Sparse Coding
     X_hat = zeros(par.ps^2,par.maxr*par.maxc, 'double');
@@ -69,12 +69,12 @@ for ite  =  1 : par.IteNum
     end
     im_out  =  im_out./(im_wei+eps);
     % calculate the PSNR
-    PSNR =   csnr( im_out*255, par.I*255, 0, 0 );
-    SSIM      =  cal_ssim( im_out*255, par.I*255, 0, 0 );
+    PSNR =   csnr( im_out*255, par.tI*255, 0, 0 );
+    SSIM      =  cal_ssim( im_out*255, par.tI*255, 0, 0 );
     fprintf('Iter %d : PSNR = %2.4f, SSIM = %2.4f\n',ite, PSNR,SSIM);
-    if mod(ite,par.changeD)==0
-        par.nlsp = par.nlsp + par.increase;
-    end
+%     if mod(ite,par.changeD)==0
+%         par.nlsp = par.nlsp + par.increase;
+%     end
     par.PSNR(ite,par.image) = PSNR;
     par.SSIM(ite,par.image) = SSIM;
 end
