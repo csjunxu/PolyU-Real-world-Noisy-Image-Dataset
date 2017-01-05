@@ -37,6 +37,7 @@ for cls_num= [32]
             vg=1;
             randn('seed',0);
             noi=par.nSig*randn(h,w);
+            par.In = zeros(size(par.I));
             par.In(:,:,1)=par.I(:,:,1)+vr*noi;
             par.In(:,:,2)=par.I(:,:,2)+vg*noi;
             par.In(:,:,3)=par.I(:,:,3)+vb*noi;
