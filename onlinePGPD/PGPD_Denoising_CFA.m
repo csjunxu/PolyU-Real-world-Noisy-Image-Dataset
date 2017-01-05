@@ -1,6 +1,7 @@
 clear;
+% Original_image_dir  =    'C:\Users\csjunxu\Desktop\PGPD_TIP\Kodak24\kodak_color\';
 Original_image_dir  =    './';
-fpath = fullfile(Original_image_dir, '*.tif');
+fpath = fullfile(Original_image_dir, '*.png');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
 
@@ -16,8 +17,8 @@ for cls_num= [32]
         par.c1 = c1*2*sqrt(2);
         par.IteNum = 3*par.changeD;
         % record all the results in each iteration
-        par.PSNR = zeros(par.IteNum,im_num,'single');
-        par.SSIM = zeros(par.IteNum,im_num,'single');
+        par.PSNR = zeros(par.IteNum,im_num,'double');
+        par.SSIM = zeros(par.IteNum,im_num,'double');
         T512 = [];
         T256 = [];
         for i = 1:im_num
