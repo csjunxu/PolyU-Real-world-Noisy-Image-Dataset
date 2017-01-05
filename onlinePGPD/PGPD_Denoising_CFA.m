@@ -1,5 +1,5 @@
 clear;
-Original_image_dir  =    '../pca_cfa_denoising/';
+Original_image_dir  =    './';
 fpath = fullfile(Original_image_dir, '*.tif');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -12,7 +12,7 @@ par.Win = min(2*par.ps,16);
 
 for cls_num= [32]
     par.cls_num = cls_num; % number of clusters
-    for c1 = 0.1:0.1:1
+    for c1 = 0.1:0.02:0.2
         par.c1 = c1*2*sqrt(2);
         par.IteNum = 3*par.changeD;
         % record all the results in each iteration
@@ -26,6 +26,7 @@ for cls_num= [32]
             par.image = i;
             par.I =  im2double( imread(fullfile(Original_image_dir, im_dir(i).name)) );
             S = regexp(im_dir(i).name, '\.', 'split');
+            fprintf('The image is %s:', im_dir(i).name); 
             [h,w,ch]=size(par.I);
             %%%%%%%%%%%%%
             nSig=12;
@@ -40,14 +41,9 @@ for cls_num= [32]
             par.In(:,:,3)=par.I(:,:,3)+vb*noi;
             %%%%%%%%%%1. downsampling to Bayer pattern: CFA noisy image%%%%
             %%noisy image
-            par.mI(1:h,1:w)=par.In(:,:,2);
-            par.mI(1:2:h,2:2:w)=par.In(1:2:h,2:2:w,1);
-            par.mI(2:2:h,1:2:w)=par.In(2:2:h,1:2:w,3);
+            par.mI = rgb2cfa(par.In);
             %%noiseless image
-            par.tI(1:h,1:w)=par.I(:,:,2);
-            par.tI(1:2:h,2:2:w)=par.I(1:2:h,2:2:w,1);
-            par.tI(2:2:h,1:2:w)=par.I(2:2:h,1:2:w,3);
-            %                     snro=csnr(par.mI,par.tI,20,20)
+            par.tI = rgb2cfa(par.I);
             
             fprintf('%s :\n',im_dir(i).name);
             PSNR =   csnr( par.mI*255, par.tI*255, 0, 0 );
@@ -60,17 +56,18 @@ for cls_num= [32]
             % calculate the PSNR
             par.PSNR(par.IteNum,par.image)  =   csnr( im_out*255, par.tI*255, 0, 0 );
             par.SSIM(par.IteNum,par.image)      =  cal_ssim( im_out*255, par.tI*255, 0, 0 );
-            imname = sprintf('nSig%d_clsnum%d_c%2.2f_%s',nSig,cls_num,c1,im_dir(i).name);
-            imwrite(im_out,imname);
+%             imname = sprintf('nSig%d_clsnum%d_c%2.2f_%s',nSig,cls_num,c1,im_dir(i).name);
+%             imwrite(im_out,imname);
             fprintf('%s : PSNR = %2.4f, SSIM = %2.4f \n',im_dir(i).name, par.PSNR(par.IteNum,par.image),par.SSIM(par.IteNum,par.image)     );
             %%%%%%%%%%%%3. color demosaicking
             %We use the following method for color demosaicking
             %L. Zhang and X. Wu, Color demosaicking via directional linear minimum mean square-error estimation,?
             %IEEE Trans. on Image Processing, vol. 14, pp. 2167-2178, Dec. 2005.
-            dmI=dmsc(im_out);
-            PSNR=csnr(dmI*255,par.I*255,20,20);
-            SSIM=cal_ssim( dmI*255, par.I*255, 0, 0 );
-            fprintf('%s : PSNR = %2.4f, SSIM = %2.4f \n',im_dir(i).name, PSNR, SSIM);
+            dmI=dmsc(im_out*255);
+            fprintf('%s : PSNR =', im_dir(i).name); 
+            csnr(dmI,par.I*255,20,20)
+            fprintf('\n SSIM ='); 
+            cal_ssim(dmI, par.I*255,20,20)
         end
         mPSNR=mean(par.PSNR,2);
         [~, idx] = max(mPSNR);

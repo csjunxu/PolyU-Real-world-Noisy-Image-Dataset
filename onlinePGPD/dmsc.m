@@ -1,6 +1,6 @@
 %Please cite the following paper if you use this code for research purpose: 
 %L. Zhang and X. Wu,
-%“Color demosaicking via directional linear minimum mean square-error estimation,” 
+%Color demosaicking via directional linear minimum mean square-error estimation,?
 %IEEE Trans. on Image Processing, vol. 14, pp. 2167-2178, Dec. 2005.
 
 function out=dmsc(A)
