@@ -13,13 +13,13 @@ par.Win = min(4*par.ps, 16);
 par.IteNum = 1;
 tol = 1e-3;
 param.tol = tol;
-for alpha = 0:0.1:1
+for alpha = 0.1:0.1:1
     param.alpha = alpha;
-    for gamma = 0:0.1:1;
+    for gamma = .1:.1:0.9;
         param.gamma = gamma;
-        for tau = 0:0.1:1;
+        for tau = 0.2:0.1:1;
             param.tau = tau;
-            for mu = 0:0.1:1;
+            for mu = 0.6;
                 param.mu = mu;
                 % record all the results in each iteration
                 par.PSNR = zeros(par.IteNum,im_num,'double');

@@ -17,7 +17,7 @@ while Flag
     %% 1 squash function
     Df = -2 * [(Y - L * R') * R; (Y' - R * L') * L];
     Akhat = squash(Ak - param.tau/2 * Df, param.tau * param.mu);
-    if ( norm(Ak-Akhat)/norm(Ak) >= param.tol )
+    if ( norm(Ak-Akhat)/norm(Ak) < param.tol )
         Flag = false;
     end
     %% 2 Compute the smallest nonnegative intergel "ell" which satisfy:
