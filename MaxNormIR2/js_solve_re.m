@@ -11,13 +11,13 @@
 %
 % Copyright by Jie Shen, js2007@rutgers.edu
 
-function [r, e] = js_solve_re(z, L, lambda2)
+function [R, E] = js_solve_re(Z, L, lambda2)
 
 % initialization
 [p, d] = size(L);
-
-r = zeros(d, 1);
-e = zeros(p, 1);
+[p, n] = size(Z);
+R = zeros(n, d);
+E = zeros(p, n);
 
 converged = false;
 maxIter = 100;
@@ -33,27 +33,27 @@ LLtinv = (L'* L + 0.01 * I) \ L';
 
 while ~converged
     iter = iter + 1;
-    rorg = r;
+    rorg = R;
     
-    diff_ze = z - e;
+    diff_ze = Z - E;
     
 %     r0 = (L' * L + 0.0001 * I) \ (L' * diff_ze);
-    r0 = LLtinv * diff_ze;
+    Rt = LLtinv * diff_ze;
 %     r0 = LtL_pad \ [L' * diff_ze; 0];
-    norm_r0 = norm(r0);
+    norm_Rt = max(sum(Rt.^2, 1)); %?
     
-    if norm_r0 <= 1
-        r = r0;
+    if norm_Rt <= 1
+        R = Rt';
     else
-        [r, eta] = js_solve_r( L, diff_ze);
+        [R, eta] = js_solve_r( L, diff_ze);
     end
     
-    eorg = e;
+    eorg = E;
     
     % soft-thresholding
-    e = wthresh(z - L * r, 's', lambda2);
+    E = threshholding(Z - L * R', 's', lambda2);
     
-    stopc = max(norm(e - eorg), norm(r - rorg))/ p;
+    stopc = max(norm(E - eorg), norm(R - rorg))/ p;
     
     if stopc < 1e-6 || iter > maxIter
         converged = true;

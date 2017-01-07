@@ -11,7 +11,7 @@
 %
 % Copyright by Jie Shen, js2007@rutgers.edu
 
-function [r, eta] = js_solve_r(L, diff_ze)
+function [R, eta] = js_solve_r(L, diff_ze)
 aux_data = L' * diff_ze;
 LtL = L' * L;
 
@@ -25,8 +25,8 @@ converged = false;
 
 % find a correct region
 while ~converged
-    r = (LtL + eta * I) \ aux_data;
-    nrm = norm(r);
+    Rt = (LtL + eta * I) \ aux_data;
+    nrm = max(sum(Rt.^2, 1)); %?
     
     if nrm < 1
         converged = true;
@@ -40,8 +40,8 @@ converged = false;
 eta = (start_pt + end_pt) /2;
 
 while ~converged
-    r = (LtL + eta * I) \ aux_data;
-    nrm = norm(r);
+    Rt = (LtL + eta * I) \ aux_data;
+    nrm = max(sum(Rt.^2, 1)); %?
     
     mid_pt = (start_pt + end_pt ) /2;
     
@@ -56,5 +56,5 @@ while ~converged
         eta = (start_pt + end_pt) / 2;
     end
 end
-
+R = Rt';
 end
