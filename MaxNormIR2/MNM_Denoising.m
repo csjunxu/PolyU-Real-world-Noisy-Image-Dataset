@@ -26,8 +26,7 @@ for ite  =  1 : par.IteNum
         i
         idx    =   blk_arr(:,i);
         Y         =   nDCnlX(:, idx);
-        [L_est, R_est, ~] = js_solve_mrmd(Y, par.rank, par.lambda1, par.lambda2);
-        Yhat = L_est * R_est';
+        Yhat = js_solve_mrmd(Y, par.rank, par.lambda1);
         % add DC components and aggregation
         X_hat(:,blk_arr(:,i)) = X_hat(:,blk_arr(:,i))+bsxfun(@plus, Yhat, DC(:,i));
         W(:,blk_arr(:,i)) = W(:,blk_arr(:,i))+ones(par.ps^2,par.nlsp);
