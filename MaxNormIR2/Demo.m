@@ -8,13 +8,13 @@ im_num = length(im_dir);
 par.step = 4; % the step of two neighbor patches
 par.ps = 8; % patch size
 par.changeD = 3;
-nlsp = 64;
+nlsp = 40;
 par.Win = min(2*par.ps, 20);
 par.IteNum = 1;
-par.rank = par.ps^2/2; %
-for lambda1 = 0:0.05:0.5
+par.rank = min(nlsp, par.ps^2); %
+for lambda1 = [0 0.05]
     par.lambda1 = lambda1;
-    for lambda2 = 0:0.05:0.5
+    for lambda2 = [0 0.05]
         par.lambda2 = lambda2;
         % record all the results in each iteration
         par.PSNR = zeros(par.IteNum,im_num,'double');
@@ -44,6 +44,8 @@ for lambda1 = 0:0.05:0.5
             %%%%%%%%%%1. downsampling to Bayer pattern: CFA noisy image%%%%
             %%noisy image
             par.mI = rgb2cfa(par.In);
+            imname = sprintf('Noisy_nSig%d_%s',nSig,im_dir(i).name);
+            imwrite(par.In,imname);
             %%noiseless image
             par.tI = rgb2cfa(par.I);
             
@@ -58,8 +60,6 @@ for lambda1 = 0:0.05:0.5
             % calculate the PSNR
             par.PSNR(par.IteNum,par.image)  =   csnr( im_out*255, par.tI*255, 0, 0 );
             par.SSIM(par.IteNum,par.image)      =  cal_ssim( im_out*255, par.tI*255, 0, 0 );
-            %             imname = sprintf('nSig%d_clsnum%d_c%2.2f_%s',nSig,cls_num,c1,im_dir(i).name);
-            %             imwrite(im_out,imname);
             fprintf('%s : PSNR = %2.4f, SSIM = %2.4f \n',im_dir(i).name, par.PSNR(par.IteNum,par.image),par.SSIM(par.IteNum,par.image)     );
             %%%%%%%%%%%%3. color demosaicking
             %We use the following method for color demosaicking
@@ -70,6 +70,8 @@ for lambda1 = 0:0.05:0.5
             csnr(dmI,par.I*255,20,20)
             fprintf('\n SSIM =');
             cal_ssim(dmI, par.I*255,20,20)
+            imname = sprintf('MNM_nSig%d_lambda1%2.2f_lambda2%2.2f_%s',nSig,lambda1,lambda2,im_dir(i).name);
+            imwrite(dmI/255,imname);
         end
         mPSNR=mean(par.PSNR,2);
         [~, idx] = max(mPSNR);
@@ -78,7 +80,7 @@ for lambda1 = 0:0.05:0.5
         mSSIM=mean(SSIM,2);
         fprintf('The best PSNR result is at %d iteration. \n',idx);
         fprintf('The average PSNR = %2.4f, SSIM = %2.4f. \n', mPSNR(idx),mSSIM);
-        name = sprintf('MNM_nSig%d_%2.2f_%2.2f.mat',nSig,lambda1,lambda2);
+        name = sprintf('MNM_fence_nSig%d_%2.2f_%2.2f.mat',nSig,lambda1,lambda2);
         save(name,'nSig','PSNR','SSIM','mPSNR','mSSIM');
     end
 end

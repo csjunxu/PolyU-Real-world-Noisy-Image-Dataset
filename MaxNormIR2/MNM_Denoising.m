@@ -23,6 +23,7 @@ for ite  =  1 : par.IteNum
     X_hat = zeros(par.ps^2,par.maxr*par.maxc, 'double');
     W = zeros(par.ps^2,par.maxr*par.maxc, 'double');
     for i = 1:size(blk_arr, 2)
+        i
         idx    =   blk_arr(:,i);
         Y         =   nDCnlX(:, idx);
         [L_est, R_est, ~] = js_solve_mrmd(Y, par.rank, par.lambda1, par.lambda2);
