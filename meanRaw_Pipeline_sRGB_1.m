@@ -1,5 +1,5 @@
 clear;
-Original_image_dir = '20161230/';
+Original_image_dir = '20170105/';
 fpath = fullfile(Original_image_dir, '*.ARW');
 im_dir  = dir(fpath);
 im_num = length(im_dir);
@@ -29,12 +29,12 @@ for i = 1:im_num
     Raw = double(imread([Original_image_dir rawname '.tiff']));
     fprintf('Processing %s. \n', rawname);
     meanRawAll = meanRawAll + Raw;
-    if i == min(500,im_num)
-        meanRaw500 = uint16(meanRawAll./min(500,im_num));
-        %         imshow(meanRaw500);
-        imwrite(meanRaw500, [D{1} 'mean/meanRaw500_ARW2TIF.tiff']);
-        clear meanRaw500;
-    end
+%     if i == min(500,im_num)
+%         meanRaw500 = uint16(meanRawAll./min(500,im_num));
+%         %         imshow(meanRaw500);
+%         imwrite(meanRaw500, [D{1} 'mean/meanRaw500_ARW2TIF.tiff']);
+%         clear meanRaw500;
+%     end
     
     %% get parameters of black/saturation and wb_multipliers
     [status,cmdout] = system(['dcraw -w -v C:\Users\csjunxu\Desktop\Projects\RID_Dataset\' D{1} '\' rawname '.ARW']);
