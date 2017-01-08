@@ -20,6 +20,7 @@ for i = 1:im_num
         %         imshow(meansRGB500);
         imwrite(meansRGB500,[D{1} 'mean/meansRGB' num2str(i) '.JPG']);
         clear meansRGB500;
+        display(sprintf('Average: Access sample %d', i));
     end
 end
 % meansRGBAll = uint8(meansRGBAll./im_num);
