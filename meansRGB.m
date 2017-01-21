@@ -9,7 +9,7 @@ dirFlags = [files.isdir];
 subdir = files(dirFlags);
 % Print folder names to command window.
 for k = 1 : length(subdir)
-    if length(findstr(subdir(k).name, 'mean')) >= 1 || strcmp(subdir(k).name, '.') == 1 || strcmp(subdir(k).name, '..') == 1
+    if length(strfind(subdir(k).name, 'mean')) >= 1 || strcmp(subdir(k).name, '.') == 1 || strcmp(subdir(k).name, '..') == 1
         continue;
     end
     fprintf('Sub folder #%d = %s\n', k, subdir(k).name);
