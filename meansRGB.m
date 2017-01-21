@@ -9,7 +9,7 @@ dirFlags = [files.isdir];
 subdir = files(dirFlags);
 % Print folder names to command window.
 for k = 1 : length(subdir)
-    if strcmp(subdir(k).name, '.') == 1 || strcmp(subdir(k).name, '..') == 1
+    if length(findstr(subdir(k).name, 'mean')) >= 1 || strcmp(subdir(k).name, '.') == 1 || strcmp(subdir(k).name, '..') == 1
         continue;
     end
     fprintf('Sub folder #%d = %s\n', k, subdir(k).name);
@@ -25,14 +25,14 @@ for k = 1 : length(subdir)
     sRGB = double(imread(fullfile(sRGB_dir, im_dir(1).name)));
     meansRGBAll = zeros(size(sRGB));
     meansRGB500 = zeros(size(sRGB));
-    for i = 1:4%im_num
+    for i = 1:im_num
         %% read the tiff image
         sRGB = double(imread(fullfile(sRGB_dir, im_dir(i).name)));
         S = regexp(im_dir(i).name, '\.', 'split');
         rawname = S{1};
         %     fprintf('Processing %s. \n', rawname);
         meansRGBAll = meansRGBAll + sRGB;
-        if mod(i, 2) == 0
+        if mod(i, 500) == 0
             meansRGB500 = uint8(meansRGBAll ./ i);
             %         imshow(meansRGB500);
             imwrite(meansRGB500, [mean_dir '\' D{end} '_meansRGB' num2str(i) '.JPG']);
