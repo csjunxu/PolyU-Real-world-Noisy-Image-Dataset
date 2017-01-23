@@ -1,7 +1,7 @@
 % given paired noisy and clean images with high resolutions, this function crops these
 % images into smaller parts with paired regions
 clear;
-Original_image_dir  =    'C:/Users/csjunxu/Desktop/Projects/RID_Dataset/20170121/';
+Original_image_dir  =    'C:/Users/csjunxu/Desktop/Projects/RID_Dataset/20170123DJI/';
 % Get a list of all files and folders in this folder.
 files = dir(Original_image_dir);
 % Get a logical vector that tells which is a directory.
@@ -29,15 +29,15 @@ for k = 1 : length(subdir)
     % set the image size to 512x512
     height = 512;
     width = 512;
-    list = randi(nim_num, [1 10]);
+    list = randi(nim_num, [1 20]);
     for i = 1:length(list)
         nI =  im2double( imread(fullfile(sRGB_dir, nim_dir(list(i)).name)) );
         S = regexp(nim_dir(list(i)).name, '\.', 'split');
         fprintf('The image is %s.\n', S{1});
         [h, w, ch]=size(nI);
         %% 1. randomly generate position index
-        hi = randi( [min(h/4, h - height + 1), 3/4 * h] );
-        wi = randi( [min(w/4, w - width + 1), 3/4 * w] );
+        hi = randi( [min(floor(h/4), h - height + 1), floor(3/4 * h)] );
+        wi = randi( [min(floor(w/4), w - width + 1), floor(3/4 * w)] );
         %% 2. crop paired images
         cropI = I( hi : hi + height - 1, wi : wi + width - 1, : );
         cropnI = nI( hi : hi + height - 1, wi : wi + width - 1, : );
@@ -45,8 +45,8 @@ for k = 1 : length(subdir)
          
         imshow(cropnI);
         %% 3. write images
-        write_mean_dir = 'C:/Users/csjunxu/Desktop/CVPR2017/our_Results/Real_MeanImage/';
-        write_sRGB_dir = 'C:/Users/csjunxu/Desktop/CVPR2017/our_Results/Real_NoisyImage/';
+        write_mean_dir = 'C:/Users/csjunxu/Desktop/CVPR2017/DJI_Results/Real_MeanImage/';
+        write_sRGB_dir = 'C:/Users/csjunxu/Desktop/CVPR2017/DJI_Results/Real_NoisyImage/';
         if ~isdir(write_mean_dir)
             mkdir(write_mean_dir)
         end
