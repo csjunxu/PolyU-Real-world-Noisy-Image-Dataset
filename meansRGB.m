@@ -1,6 +1,6 @@
 clear;
 %% mean of raw images
-Original_image_dir = 'C:\Users\csjunxu\Desktop\Projects\RID_Dataset\20170121\';
+Original_image_dir = 'C:\Users\csjunxu\Desktop\Projects\RID_Dataset\20170123DJI\';
 % Get a list of all files and folders in this folder.
 files = dir(Original_image_dir);
 % Get a logical vector that tells which is a directory.
