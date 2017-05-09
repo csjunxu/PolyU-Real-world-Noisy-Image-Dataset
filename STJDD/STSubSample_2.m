@@ -28,7 +28,6 @@ for method = ['A' 'B']
             Raw = double(imread([Original_image_dir '/' S{1} '.tiff']));
             SsubRaw = spatialaverageA(Raw, W);
             STsubRaw = STsubRaw + SsubRaw;
-            %     imshow(STmeanRaw);
         end
         STmeanRaw = STsubRaw / sam_num;
         imwrite(uint16(STmeanRaw), ['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/STA_' D{end} '_' method '.tiff']);
@@ -41,7 +40,6 @@ for method = ['A' 'B']
             Raw = double(imread([Original_image_dir '/' S{1} '.tiff']));
             SsubRaw = spatialaverageB(Raw, W);
             STsubRaw = STsubRaw + SsubRaw;
-            %     imshow(STmeanRaw);
         end
         STmeanRaw = STsubRaw / sam_num;
         imwrite(uint16(STmeanRaw), ['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/STA_' D{end} '_' method '.tiff']);

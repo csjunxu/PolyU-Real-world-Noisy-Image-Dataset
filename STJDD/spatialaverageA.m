@@ -35,7 +35,6 @@ for i = 1:1:maxh
         subRAW(i*2, j*2) = mean(mean(Patchij(2:2:W, 2:2:W))); % the B pixel value
     end
 end
-subRAW = uint16(subRAW);
 % imshow(double(subRAW)/255);
 % % Raw image to RGB image
 % for i = 1:1:maxh

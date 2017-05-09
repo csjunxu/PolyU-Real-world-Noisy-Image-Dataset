@@ -43,7 +43,7 @@ for i = 1:1:maxh
         end
     end
 end
-subRAW = uint16(subRAW);
+
 % imshow(double(subRAW)/255);
 % % Raw image to RGB image
 % for i = 1:1:maxh
