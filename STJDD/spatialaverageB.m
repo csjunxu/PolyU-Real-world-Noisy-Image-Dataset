@@ -36,8 +36,8 @@ for i = 1:1:maxh
             subRAW(i, j) = mean(mean(Patchij(1:2:W, 2:2:W)));
             subRAW(i+1, j-1) = mean(mean(Patchij(2:2:W, 1:2:W)));
         elseif mod(i, 2) == 0 && mod(j, 2) == 1 % green pixel 2
-            subRAW(i, j) = subRAW(i, j+1);
-            subRAW(i-1, j+1) = subRAW(i, j);
+            subRAW(i, j) = mean(mean(Patchij(2:2:W, 1:2:W)));
+            subRAW(i-1, j+1) = mean(mean(Patchij(1:2:W, 2:2:W)));
         elseif mod(i, 2) == 0 && mod(j, 2) == 0 % blue pixel
             subRAW(i, j) = mean(mean(Patchij(2:2:W, 2:2:W)));
         end
