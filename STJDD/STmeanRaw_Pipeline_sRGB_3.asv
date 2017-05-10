@@ -48,7 +48,8 @@ imwrite(lin_bayer,['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/' r
 
 %% 3 Demosaicking is problematic for the mean data
 temp = uint16(balanced_bayer/max(balanced_bayer(:)) * (2^16-1));
-lin_rgb = double(demosaic(temp,'rggb'))/(2^16-1);
+% lin_rgb = double(demosaic(temp,'rggb'))/(2^16-1);
+lin_rgb = double(dlmmse(double(temp)))/(2^16-1);
 %     imshow(lin_rgb);
 % imwrite(lin_rgb,[D{end} '_3Demosaicked.png']);
 imwrite(lin_rgb,['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/' rawname '_3Demosaicked.png']);
