@@ -34,24 +34,21 @@ black = 128; % str2double(cmdout(148:150)); % 128
 saturation = 4095; % str2double(cmdout(248:251)); % 4095
 lin_bayer = (Raw-black)/(saturation-black); %  normailization to [0,1];
 lin_bayer = max(0, min(lin_bayer,1)); % no value larger than 1 or less than 0;
-% imshow(lin_bayer);
-% imwrite(lin_bayer,[D{end} '_1Linearized.png']);
 imwrite(lin_bayer,['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/' rawname '_1Linearized.png']);
 
 %% 2 White Balancing
 wb_multipliers = [str2double(cmdout(270:277)), 1, str2double(cmdout(288:295))]; % for particular condition, from dcraw;
 mask = wbmask(size(lin_bayer,1),size(lin_bayer,2),wb_multipliers,'rggb');
 balanced_bayer = lin_bayer .* mask;
-%     imshow(balanced_bayer);
-% imwrite(lin_bayer,[D{end} '_2WhiteBalanced.png']);
 imwrite(lin_bayer,['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/' rawname '_2WhiteBalanced.png']);
 
 %% 3 Demosaicking is problematic for the mean data
 temp = uint16(balanced_bayer/max(balanced_bayer(:)) * (2^16-1));
+% addpath(genpath('ICIP2015_ARI_code'));
+% lin_rgb = double(demosaick(double(temp),'rggb'))/(2^8-1);
 lin_rgb = double(demosaic(temp,'rggb'))/(2^16-1);
-%     imshow(lin_rgb);
-% imwrite(lin_rgb,[D{end} '_3Demosaicked.png']);
 imwrite(lin_rgb,['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/' rawname '_3Demosaicked.png']);
+
 
 %% 4 Color Space Conversion
 sRGB2XYZ = [0.4124564 0.3575761 0.1804375;0.2126729 0.7151522 0.0721750;0.0193339 0.1191920 0.9503041];
@@ -63,8 +60,6 @@ sRGB2Cam = sRGB2Cam./ repmat(sum(sRGB2Cam,2),1,3); % normalize each rows of sRGB
 Cam2sRGB = (sRGB2Cam)^-1;
 lin_srgb = apply_cmatrix(lin_rgb, Cam2sRGB);
 lin_srgb = max(0,min(lin_srgb,1)); % Always keep image clipped b/w 0-1
-%     imshow(lin_srgb);
-% imwrite(lin_srgb,[D{end} '_4ColorSpaceConversed.png']);
 imwrite(lin_srgb,['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/' rawname '_4ColorSpaceConversed.png']);
 
 %% 5 Brightness and Gamma Correction
@@ -72,6 +67,5 @@ grayim = rgb2gray(lin_srgb); % Consider only gray channel
 grayscale = 0.25/mean(grayim(:));
 bright_srgb = min(1,lin_srgb * grayscale); % Always keep image value less than 1
 nl_srgb = bright_srgb.^(1/2.2); % 2.4 in official documentation of sRGB
-% imwrite(nl_srgb,[D{end} '_5BrightGammaCorrected.png']);
 imwrite(nl_srgb,['C:/Users/csjunxu/Desktop/TIP2017/RID_Dataset/STA_Results/' rawname '_5BrightGammaCorrected.png']);
 
